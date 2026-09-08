@@ -5,7 +5,7 @@ import Container from "../components/Container.astro";
 import Icon from "../components/Icon.astro";
 import { SOCIALS } from "../consts";
 import { WORK, CURRENTLY_BUILDING } from "../data/work";
-import portrait from "../assets/portrait.jpg";
+import office from "../assets/office.jpg";
 ---
 
 <BaseLayout>
@@ -27,9 +27,9 @@ import portrait from "../assets/portrait.jpg";
       <div class="flex flex-1 flex-col gap-8 md:gap-10">
         <div class="h-80 overflow-hidden rounded-3xl md:h-[440px]">
           <Image
-            src={portrait}
-            alt="Ben Ackles"
-            widths={[400, 800, 1200]}
+            src={office}
+            alt="A corner of Ben's home office: framed mountaineering photographs and two painted portraits of his dogs above a bookshelf."
+            widths={[400, 800, 1200, 1600]}
             sizes="(min-width: 1024px) 764px, (min-width: 768px) 100vw, 350px"
             loading="eager"
             fetchpriority="high"

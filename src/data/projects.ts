@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Built the positioning, messaging, pricing, product narrative, and go-to-market foundation for a professional networking product from the ground up.",
     linkLabel: "Preview MeetCard.io",
-    href: "https://www.meetcard.io/",
+    href: "https://beta.meetcard.io/",
   },
   {
     eyebrow: "Enumerate · AI Product Launch",
