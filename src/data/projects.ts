@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     dot: "signal",
     wip: true,
     summary:
-      "Built a working design system in Storybook to explore component architecture, documentation, testing, and the workflows behind modern frontend development.",
+      "Built the design system behind MeetCard, using Figma and Storybook to connect design and development, standardize reusable components, and ship product faster with consistency.",
     linkLabel: "Explore Deck",
     href: "https://deck.meetcard.io/",
   },
@@ -35,7 +35,7 @@ export const PROJECTS: Project[] = [
     dot: "signal",
     wip: true,
     summary:
-      "Built the positioning, messaging, pricing, product narrative, and go-to-market foundation for a professional networking product from the ground up.",
+      "Built a networking product from concept to market, spanning product strategy, UX, development, positioning, messaging, pricing, and go-to-market.",
     linkLabel: "Preview MeetCard.io",
     href: "https://beta.meetcard.io/",
   },
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     name: "Numa AI",
     dot: "enumerate",
     summary:
-      "Positioned embedded AI around the work it completes, bringing five capabilities together under one clear product story.",
+      "Helped introduce agentic workflows into an established SaaS platform, unifying five AI capabilities into one clear product story focused on completed work, not just assistance.",
     linkLabel: "View Numa AI",
     href: "https://goenumerate.com/products/numa-ai",
   },
@@ -53,7 +53,7 @@ export const PROJECTS: Project[] = [
     name: "Storyblok",
     dot: "storyblok",
     summary:
-      "Built a messaging architecture that positioned the same headless CMS for developers, marketers, and enterprise buyers without fragmenting the product story.",
+      "Led a company-wide repositioning and rebrand to break through a crowded headless CMS market, sharpening the category story, messaging architecture, and value proposition across developers, marketers, and enterprise buyers.",
     linkLabel: "View storyblok.com",
     href: "https://www.storyblok.com",
   },
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
     name: "Catalyst",
     dot: "bigcommerce",
     summary:
-      "Turned BigCommerce's composable commerce strategy into an open-source storefront developers could evaluate, adopt, and build with.",
+      "Led GTM for a major developer initiative to accelerate headless storefront builds, shaping the positioning, launch strategy, partner adoption, and developer story around a composable reference storefront.",
     linkLabel: "Visit Catalyst",
     href: "https://www.catalyst.dev",
   },
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
     name: "GraphQL Storefront API",
     dot: "bigcommerce",
     summary:
-      "Turned a technical API into a guided developer journey, moving from product value to implementation through a video solution series.",
+      "Revived a stalled developer release, brought Cart & Checkout into the story, and helped turn the API into a clearer path to headless commerce ahead of Catalyst.",
     linkLabel: "Watch the series",
     href: "https://www.youtube.com/watch?v=BSU3ufg8-wU",
   },
