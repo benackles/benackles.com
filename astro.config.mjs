@@ -76,6 +76,12 @@ const codeBlockChrome = {
 export default defineConfig({
   site: "https://benackles.com",
   integrations: [sitemap()],
+  build: {
+    // The whole stylesheet is a few kB brotli'd, so inlining it removes a
+    // render-blocking request from the critical path. Astro's "auto" only
+    // inlines sheets under 4kB.
+    inlineStylesheets: "always",
+  },
   markdown: {
     shikiConfig: {
       theme: "github-dark-default",

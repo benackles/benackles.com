@@ -4,6 +4,11 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../consts";
 
+// Preloaded so the font fetch starts with the HTML rather than waiting for
+// the stylesheet to parse. Only the latin normal face — latin-ext and
+// italic are conditional and rarely hit.
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+
 interface Props {
   title?: string;
   description?: string;
@@ -28,6 +33,13 @@ const ogImage = new URL(image, site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={interLatin}
+      crossorigin
+    />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
