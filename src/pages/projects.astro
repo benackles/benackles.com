@@ -28,7 +28,7 @@ const dotClass: Record<DotColor, string> = {
         PROJECTS.map((project) => (
           <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)]">
             <p class="eyebrow">{project.eyebrow}</p>
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-3">
               <span
                 class:list={[
                   "size-8 shrink-0 rounded-full",
@@ -36,12 +36,19 @@ const dotClass: Record<DotColor, string> = {
                 ]}
                 aria-hidden="true"
               />
-              <h2 class="text-lg font-bold text-ink">{project.name}</h2>
-              {project.wip && (
-                <span class="rounded bg-badge px-2 py-[3px] text-[10px] font-medium tracking-[0.8px] text-eyebrow">
-                  WIP
-                </span>
-              )}
+              {/*
+                The badge sits inside the heading so it flows with the last
+                word rather than wrapping onto its own line when the title
+                fills the row.
+              */}
+              <h2 class="text-lg font-bold text-balance text-ink">
+                {project.name}
+                {project.wip && (
+                  <span class="ml-2 inline-block translate-y-[-1px] rounded bg-badge px-2 py-[3px] align-middle text-[10px] font-medium tracking-[0.8px] whitespace-nowrap text-eyebrow">
+                    WIP
+                  </span>
+                )}
+              </h2>
             </div>
             <p class="flex-1 text-sm leading-[1.6] text-muted">
               {project.summary}
