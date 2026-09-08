@@ -1,0 +1,35 @@
+# Netlify's GitHub App subscription for this site never registered correctly
+# — the site record was created through the raw API, and reconnecting in the
+# UI no-ops because Netlify already considers the repo linked. Until that is
+# repaired, pushes are deployed by calling a build hook explicitly.
+#
+# The hook URL lives in the NETLIFY_BUILD_HOOK repo secret. Anyone holding it
+# can trigger a production build, so it must not be committed.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# A newer push supersedes an in-flight run; no point building a stale commit.
+concurrency:
+  group: netlify-deploy
+  cancel-in-progress: true
+
+jobs:
+  trigger:
+    name: Trigger Netlify build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the build hook
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "NETLIFY_BUILD_HOOK is not set on this repository." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --request POST \
+            --data '{}' "$HOOK" > /dev/null
+          echo "Netlify build triggered for ${GITHUB_SHA:0:7}."
