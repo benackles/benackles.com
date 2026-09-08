@@ -61,14 +61,15 @@ keyboard and screen-reader behaviour for free.
 ## Project dots
 
 Each project card carries a dot in the brand colour of the company the work
-was for; the two independent projects keep their own. Values live on `:root`
-in `src/styles/global.css` as `--c-dot-*`.
+was for. Ben's own projects use Signal green `#2E6E5B`, the same value as the
+site accent. Values live on `:root` in `src/styles/global.css` as `--c-dot-*`.
 
 All three brand colours sit at roughly the same hue (~222°), and the navies
 are near-invisible on the dark background — Enumerate's `#152650` measures
 1.18:1 against `#1a1a1a`. Dark mode therefore lifts them in HSL, keeping hue
 and saturation but stepping lightness so the three blues stay distinguishable
-from each other rather than all resolving to the same tint.
+from each other rather than all resolving to the same tint. Signal green gets
+the same treatment, going from 2.90:1 to 4.52:1.
 
 ## Design tokens
 

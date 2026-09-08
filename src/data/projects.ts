@@ -6,8 +6,7 @@ export type DotColor =
   | "bigcommerce"
   | "storyblok"
   | "enumerate"
-  | "deck"
-  | "meetcard";
+  | "signal";
 
 export interface Project {
   eyebrow: string;
@@ -23,7 +22,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Independent · Developer Experience",
     name: "Deck Design System",
-    dot: "deck",
+    dot: "signal",
     wip: true,
     summary:
       "Built a working design system in Storybook to explore component architecture, documentation, testing, and the workflows behind modern frontend development.",
@@ -33,7 +32,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Independent · Zero-to-One GTM",
     name: "MeetCard",
-    dot: "meetcard",
+    dot: "signal",
     wip: true,
     summary:
       "Built the positioning, messaging, pricing, product narrative, and go-to-market foundation for a professional networking product from the ground up.",
