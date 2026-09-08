@@ -1,5 +1,6 @@
 ---
-import { NAV, SITE } from "../consts";
+import Icon from "./Icon.astro";
+import { NAV, SITE, SOCIALS } from "../consts";
 
 const year = new Date().getFullYear();
 ---
@@ -9,17 +10,35 @@ const year = new Date().getFullYear();
     <div
       class="flex flex-col gap-4 px-5 py-10 text-sm sm:flex-row sm:items-center sm:justify-between md:px-24 md:py-12"
     >
-      <ul class="flex flex-wrap gap-5 text-muted">
-        {
-          NAV.map((item) => (
-            <li>
-              <a href={item.href} class="transition-colors hover:text-accent">
-                {item.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+        <ul class="flex flex-wrap gap-5 text-muted">
+          {
+            NAV.map((item) => (
+              <li>
+                <a href={item.href} class="transition-colors hover:text-accent">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="flex items-center gap-4">
+          {
+            SOCIALS.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  aria-label={social.label}
+                  rel="me noopener"
+                  class="flex size-9 items-center justify-center rounded-[18px] border border-border bg-surface text-muted transition-colors hover:text-accent"
+                >
+                  <Icon name={social.icon} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
       <p class="text-subtle">
         &copy; {year} {SITE.author}. All rights reserved.
       </p>
