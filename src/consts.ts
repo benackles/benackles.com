@@ -38,7 +38,7 @@ export const NAV = [
 export const SOCIALS: { label: string; href: string; icon: IconName }[] = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/benackles",
+    href: "https://dub.sh/ntwphhm",
     icon: "linkedin",
   },
 ];
