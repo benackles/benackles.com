@@ -8,13 +8,13 @@
   Sizes below are the sizes the design specifies for each icon.
 */
 import {
-  Atom,
   BriefcaseBusiness,
-  ChartLine,
+  ChartScatter,
   ChevronDown,
   ChevronRight,
-  Database,
   Mail,
+  Sparkles,
+  TestTube,
 } from "@lucide/astro";
 
 import GithubIcon from "../icons/github.svg";
@@ -23,10 +23,12 @@ import TwitterIcon from "../icons/twitter.svg";
 
 const REGISTRY = {
   "briefcase-business": { component: BriefcaseBusiness, size: 18 },
-  atom: { component: Atom, size: 20 },
-  "chart-line": { component: ChartLine, size: 20 },
-  database: { component: Database, size: 20 },
   mail: { component: Mail, size: 16 },
+
+  // Work-history glyphs (20px, matching the Figma company logos).
+  sparkles: { component: Sparkles, size: 20 },
+  "chart-scatter": { component: ChartScatter, size: 20 },
+  "test-tube": { component: TestTube, size: 20 },
   "chevron-right": { component: ChevronRight, size: 12 },
   "chevron-down": { component: ChevronDown, size: 12 },
   twitter: { component: TwitterIcon, size: 16 },
