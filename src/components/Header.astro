@@ -1,0 +1,110 @@
+---
+import Icon from "./Icon.astro";
+import { NAV, SITE } from "../consts";
+
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+---
+
+<header class="bg-bg">
+  <!--
+    Three-column grid rather than justify-between so the nav stays centred
+    whether or not the CTA column is rendered.
+  -->
+  <div
+    class="mx-auto grid w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 py-4 md:px-24 md:py-6"
+  >
+    <a
+      href="/"
+      class="justify-self-start"
+      aria-label={`${SITE.author} — home`}
+    >
+      <span
+        class="flex size-9 items-center justify-center rounded-[18px] border border-border bg-card"
+      >
+        <img
+          src="/images/avatar.jpg"
+          alt=""
+          width="28"
+          height="28"
+          class="size-7 rounded-[14px] object-cover"
+        />
+      </span>
+    </a>
+
+    <div class="justify-self-center">
+      <!-- Desktop: pill nav -->
+      <nav
+        aria-label="Primary"
+        class="hidden rounded-[99px] border border-border bg-surface px-4 py-2.5 drop-shadow-[0_1px_1.5px_var(--c-pill-shadow)] md:block"
+      >
+        <ul class="flex items-center gap-6 text-sm font-medium">
+          {
+            NAV.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  class:list={[
+                    "whitespace-nowrap transition-colors hover:text-accent",
+                    isActive(item.href) ? "text-accent" : "text-muted",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Mobile: disclosure nav -->
+      <details class="relative md:hidden" name="site-nav">
+        <summary
+          class="flex cursor-pointer list-none items-center gap-2 rounded-[99px] border border-border bg-surface px-3 py-1.5 text-sm font-medium text-muted [&::-webkit-details-marker]:hidden"
+        >
+          Menu
+          <Icon name="chevron-down" class="text-muted" />
+        </summary>
+        <nav
+          aria-label="Primary"
+          class="absolute left-1/2 z-20 mt-2 w-44 -translate-x-1/2 rounded-2xl border border-border bg-card p-2 drop-shadow-[0_2px_6px_var(--c-pill-shadow)]"
+        >
+          <ul class="flex flex-col text-sm font-medium">
+            {
+              NAV.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    class:list={[
+                      "block rounded-lg px-3 py-2",
+                      isActive(item.href) ? "text-accent" : "text-muted",
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </details>
+    </div>
+
+    <div class="justify-self-end">
+      {/*
+        Primary CTA — disabled until scheduling is set up. Restore by
+        uncommenting; SITE.bookingUrl in src/consts.ts is the link target.
+
+        <a
+          href={SITE.bookingUrl}
+          class="shrink-0 rounded-[20px] border border-border bg-brand px-4 py-1.5 text-[13px] font-medium whitespace-nowrap text-white transition-opacity hover:opacity-90 md:px-5 md:py-2"
+        >
+          Book a time
+        </a>
+      */}
+    </div>
+  </div>
+</header>

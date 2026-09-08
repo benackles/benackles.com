@@ -1,0 +1,51 @@
+---
+/*
+  Icons come from Lucide (@lucide/astro). The three brand marks are the
+  exception: Lucide dropped its brand icons in v1, so github / linkedin /
+  twitter are local SVGs in src/icons — the same glyphs the Figma file
+  uses, with stroke-width normalised to Lucide's weight at 16px.
+
+  Sizes below are the sizes the design specifies for each icon.
+*/
+import {
+  Atom,
+  BriefcaseBusiness,
+  ChartLine,
+  ChevronDown,
+  ChevronRight,
+  Database,
+  Mail,
+} from "@lucide/astro";
+
+import GithubIcon from "../icons/github.svg";
+import LinkedinIcon from "../icons/linkedin.svg";
+import TwitterIcon from "../icons/twitter.svg";
+
+const REGISTRY = {
+  "briefcase-business": { component: BriefcaseBusiness, size: 18 },
+  atom: { component: Atom, size: 20 },
+  "chart-line": { component: ChartLine, size: 20 },
+  database: { component: Database, size: 20 },
+  mail: { component: Mail, size: 16 },
+  "chevron-right": { component: ChevronRight, size: 12 },
+  "chevron-down": { component: ChevronDown, size: 12 },
+  twitter: { component: TwitterIcon, size: 16 },
+  linkedin: { component: LinkedinIcon, size: 16 },
+  github: { component: GithubIcon, size: 16 },
+} as const;
+
+export type IconName = keyof typeof REGISTRY;
+
+interface Props {
+  name: IconName;
+  /** Overrides the design size for this icon. */
+  size?: number;
+  class?: string;
+}
+
+const { name, size, class: className } = Astro.props;
+const { component: Glyph, size: defaultSize } = REGISTRY[name];
+const px = size ?? defaultSize;
+---
+
+<Glyph width={px} height={px} class={className} aria-hidden="true" />

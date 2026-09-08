@@ -1,0 +1,191 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const published = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(post.data.pubDate);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <Container class="pt-8 pb-16 md:pt-12 md:pb-24">
+    <article class="flex max-w-[920px] flex-col gap-6">
+      <nav
+        aria-label="Breadcrumb"
+        class="flex items-center gap-2 pb-4 text-[13px] md:pb-8"
+      >
+        <a href="/blog" class="font-medium text-muted hover:text-accent">Blog</a>
+        <span class="text-subtle">/</span>
+        <span class="truncate font-medium text-accent">
+          {post.data.shortTitle ?? post.data.title}
+        </span>
+      </nav>
+
+      <header class="flex flex-col gap-4">
+        <p class="text-sm font-semibold text-accent uppercase">
+          {post.data.category}
+        </p>
+        <h1
+          class="text-[32px] leading-[1.15] font-extrabold tracking-[-0.01em] text-balance text-ink md:text-[48px]"
+        >
+          {post.data.title}
+        </h1>
+        <div class="flex flex-wrap items-center gap-3 text-sm">
+          <span class="text-subtle">
+            Published on <time datetime={post.data.pubDate.toISOString()}
+              >{published}</time
+            >
+          </span>
+          <span class="text-subtle" aria-hidden="true">&bull;</span>
+          <span class="font-semibold text-accent">{post.data.readingTime}</span>
+        </div>
+      </header>
+
+      <hr class="border-0 border-t border-border" />
+
+      <div class="post-body flex flex-col gap-7">
+        <Content />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style is:global>
+  /*
+    Article typography, mapped from the "blog post" frames. The first
+    paragraph is the lede at 18px; body copy settles to 16px.
+  */
+  .post-body > p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--c-muted);
+  }
+
+  .post-body > p:first-child {
+    font-size: 1.125rem;
+    line-height: 1.8;
+  }
+
+  .post-body > h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+
+  .post-body > h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+
+  @media (min-width: 768px) {
+    .post-body > h2 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .post-body > blockquote {
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  }
+
+  .post-body > blockquote p {
+    font-size: 1.125rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--c-ink);
+  }
+
+  .post-body a:not([class]) {
+    color: var(--c-accent);
+    font-weight: 600;
+    text-underline-offset: 3px;
+    text-decoration-line: underline;
+  }
+
+  .post-body ul,
+  .post-body ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--c-muted);
+  }
+
+  .post-body ul {
+    list-style: disc;
+  }
+
+  .post-body ol {
+    list-style: decimal;
+  }
+
+  /* Code panel — the dark card from the design, with its filename chrome. */
+  .post-body .code-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--c-code);
+    overflow: hidden;
+  }
+
+  .post-body .code-block__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .post-body .code-block__title {
+    font-weight: 700;
+    color: var(--c-accent);
+  }
+
+  .post-body .code-block__lang {
+    color: var(--c-subtle);
+  }
+
+  .post-body pre {
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background-color: transparent !important;
+  }
+
+  .post-body > pre {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--c-code) !important;
+  }
+
+  .post-body :not(pre) > code {
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    background-color: var(--c-surface);
+    font-size: 0.875em;
+    color: var(--c-ink);
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Icon from "../components/Icon.astro";
+import { SOCIALS } from "../consts";
+import { WORK, CURRENTLY_BUILDING } from "../data/work";
+---
+
+<BaseLayout>
+  <Container class="flex flex-col gap-12 pt-10 pb-16 md:gap-20 md:pt-20 md:pb-24">
+    <div class="flex max-w-[820px] flex-col gap-6">
+      <h1
+        class="text-[36px] leading-[1.15] font-extrabold tracking-[-0.01em] text-ink md:text-[56px]"
+      >
+        I help technical products find their market.
+      </h1>
+      <p class="text-base leading-[1.6] text-muted md:text-[18px]">
+        I'm Ben Ackles, a product marketer in Boulder, Colorado. I work across
+        positioning, messaging, and go-to-market strategy, with a particular
+        focus on products built for developers and technical teams.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-10 lg:flex-row lg:gap-16">
+      <div class="flex flex-1 flex-col gap-8 md:gap-10">
+        <div class="h-80 overflow-hidden rounded-3xl md:h-[440px]">
+          <img
+            src="/images/portrait.jpg"
+            alt="Ben Ackles"
+            width="800"
+            height="800"
+            class="size-full object-cover"
+          />
+        </div>
+
+        <div class="flex flex-col gap-6 text-base leading-[1.75] text-muted">
+          <p>
+            I've spent my career helping companies turn complicated products
+            into clear reasons to care.
+          </p>
+          <p>
+            That work usually starts well before launch. I partner with product
+            managers, engineers, designers, sales teams, and customers to
+            understand where a product fits, who it matters to, and what needs
+            to be true for people to adopt it.
+          </p>
+          <p>
+            My sweet spot is technical products. At BigCommerce, I worked on
+            developer-facing products including GraphQL APIs, App Extensions,
+            and Catalyst, an open-source storefront framework. At Storyblok, I
+            built messaging for a headless CMS across developer, marketer, and
+            enterprise audiences. More recently, I've worked on bringing AI
+            capabilities to market inside an established SaaS platform.
+          </p>
+        </div>
+
+        <hr class="border-0 border-t border-border" />
+
+        <ul class="flex items-center gap-4">
+          {
+            SOCIALS.map((social) => (
+              <li>
+                <a
+                  href={social.href}
+                  aria-label={social.label}
+                  rel="me noopener"
+                  class="flex size-9 items-center justify-center rounded-[18px] border border-border bg-surface text-muted transition-colors hover:text-accent"
+                >
+                  <Icon name={social.icon} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-8 lg:w-[420px] lg:shrink-0">
+        <section
+          class="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6"
+        >
+          <h2 class="flex items-center gap-2 text-sm font-semibold text-ink">
+            <Icon name="briefcase-business" class="text-muted" />
+            Work
+          </h2>
+          <ul class="flex flex-col gap-4">
+            {
+              WORK.map((job) => (
+                <li class="flex items-center gap-3">
+                  <span class="flex size-10 shrink-0 items-center justify-center rounded-[20px] border border-border bg-card text-ink">
+                    <Icon name={job.icon} />
+                  </span>
+                  <span class="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <span class="truncate text-sm font-semibold text-ink">
+                      {job.company}
+                    </span>
+                    <span class="text-[13px] text-muted md:truncate">
+                      {job.role}
+                    </span>
+                  </span>
+                  <span class="shrink-0 text-xs whitespace-nowrap text-subtle">
+                    {job.period}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section
+          class="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6"
+        >
+          <h2 class="text-xs font-bold tracking-wide text-accent uppercase">
+            Currently Building
+          </h2>
+          <p class="text-[15px] font-semibold text-ink">{CURRENTLY_BUILDING}</p>
+        </section>
+      </div>
+    </div>
+  </Container>
+</BaseLayout>

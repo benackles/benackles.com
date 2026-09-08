@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/inter/wght-italic.css";
+
+/*
+  Design tokens lifted from the Figma file "benackles.com"
+  (CPSoSegSHJmLvIVPRd9Ojl). Light values come from the
+  "* / desktop / light" frames, dark from "* / desktop / dark".
+
+  The raw values live on :root so they can be swapped wholesale in a
+  media query; @theme inline then exposes them to Tailwind utilities
+  (bg-bg, text-ink, border-border, …) without freezing the value.
+*/
+:root {
+  --c-bg: #faf8f4;
+  --c-surface: #f4f4f5;
+  --c-card: #faf8f4;
+  --c-border: #d9d2c7;
+  --c-ink: #18181b;
+  --c-muted: #52525b;
+  --c-subtle: #71717a;
+  --c-accent: #2e6e5b;
+  --c-eyebrow: #565c5a;
+  --c-badge: #ede7dd;
+  --c-code: #18181b;
+  --c-code-ink: #f4f4f5;
+  --c-card-shadow: rgb(0 0 0 / 0.01);
+  --c-pill-shadow: rgb(0 0 0 / 0.03);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #1a1a1a;
+    --c-surface: #18181b;
+    --c-card: #18181b;
+    --c-border: #27272a;
+    --c-ink: #fafafa;
+    --c-muted: #a1a1aa;
+    --c-subtle: #71717a;
+    --c-accent: #2dd4bf;
+    --c-eyebrow: #8a9290;
+    --c-badge: #2d3a3a;
+    --c-code: #121214;
+    --c-code-ink: #e4e4e7;
+    --c-card-shadow: rgb(0 0 0 / 0.13);
+    --c-pill-shadow: rgb(0 0 0 / 0.25);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-card: var(--c-card);
+  --color-border: var(--c-border);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-subtle: var(--c-subtle);
+  --color-accent: var(--c-accent);
+  --color-eyebrow: var(--c-eyebrow);
+  --color-badge: var(--c-badge);
+  --color-code: var(--c-code);
+  --color-code-ink: var(--c-code-ink);
+
+  /* Brand green stays constant across both themes — it is the CTA fill. */
+  --color-brand: #2e6e5b;
+
+  /* Project accent dots, straight from the Figma ellipse fills. */
+  --color-dot-blue: #3b82f6;
+  --color-dot-pink: #ec4899;
+  --color-dot-green: #10b981;
+  --color-dot-amber: #f59e0b;
+  --color-dot-violet: #8b5cf6;
+  --color-dot-red: #ef4444;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
+}
+
+@utility eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-eyebrow);
+}

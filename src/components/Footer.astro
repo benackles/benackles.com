@@ -1,0 +1,28 @@
+---
+import { NAV, SITE } from "../consts";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-bg">
+  <div class="mx-auto w-full max-w-[1440px] border-t border-border">
+    <div
+      class="flex flex-col gap-4 px-5 py-10 text-sm sm:flex-row sm:items-center sm:justify-between md:px-24 md:py-12"
+    >
+      <ul class="flex flex-wrap gap-5 text-muted">
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} class="transition-colors hover:text-accent">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-subtle">
+        &copy; {year} {SITE.author}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { USES } from "../data/uses";
+---
+
+<BaseLayout
+  title="Uses"
+  description="The GTM stacks, marketing frameworks, research tools, and productivity workflows Ben Ackles relies on daily."
+>
+  <Container class="flex flex-col gap-12 pt-10 pb-16 md:gap-20 md:pt-20 md:pb-24">
+    <PageIntro
+      title="Tools I use, resources I love, and other things I recommend."
+      lede="An inside look at the GTM stacks, marketing frameworks, research tools, and productivity workflows I rely on daily to launch products and grow categories."
+    />
+
+    <div class="flex flex-col gap-12 md:gap-16">
+      {
+        USES.map((category) => (
+          <section class="flex flex-col gap-6 md:flex-row md:gap-16">
+            <h2 class="pt-1 text-[13px] font-bold tracking-wide text-accent uppercase md:w-60 md:shrink-0">
+              {category.title}
+            </h2>
+            <ul class="flex flex-1 flex-col gap-8">
+              {category.items.map((item) => (
+                <li class="flex flex-col gap-2">
+                  <h3 class="text-base font-semibold text-ink">{item.name}</h3>
+                  <p class="text-[15px] leading-[1.65] text-muted">
+                    {item.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </Container>
+</BaseLayout>

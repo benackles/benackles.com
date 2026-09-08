@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageIntro from "../components/PageIntro.astro";
+import Icon from "../components/Icon.astro";
+import { PROJECTS, type DotColor } from "../data/projects";
+
+const dotClass: Record<DotColor, string> = {
+  blue: "bg-dot-blue",
+  pink: "bg-dot-pink",
+  green: "bg-dot-green",
+  amber: "bg-dot-amber",
+  violet: "bg-dot-violet",
+  red: "bg-dot-red",
+};
+---
+
+<BaseLayout
+  title="Projects"
+  description="Selected product marketing work across developer platforms, AI, headless CMS, and zero-to-one products."
+>
+  <Container class="flex flex-col gap-12 pt-10 pb-16 md:gap-16 md:pt-20 md:pb-24">
+    <PageIntro
+      title="How I help technical products find their market."
+      lede="Selected work across developer platforms, AI, headless CMS, and zero-to-one products. Positioning, messaging, go-to-market strategy, developer education, and launch execution."
+    />
+
+    <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        PROJECTS.map((project) => (
+          <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)]">
+            <p class="eyebrow">{project.eyebrow}</p>
+            <div class="flex flex-wrap items-center gap-3">
+              <span
+                class:list={[
+                  "size-8 shrink-0 rounded-full",
+                  dotClass[project.dot],
+                ]}
+                aria-hidden="true"
+              />
+              <h2 class="text-lg font-bold text-ink">{project.name}</h2>
+              {project.wip && (
+                <span class="rounded bg-badge px-2 py-[3px] text-[10px] font-medium tracking-[0.8px] text-eyebrow">
+                  WIP
+                </span>
+              )}
+            </div>
+            <p class="flex-1 text-sm leading-[1.6] text-muted">
+              {project.summary}
+            </p>
+            <a
+              href={project.href}
+              class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
+            >
+              {project.linkLabel} ↗
+              <Icon
+                name="chevron-right"
+                class="transition-transform group-hover:translate-x-0.5"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</BaseLayout>

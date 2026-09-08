@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import Icon from "../../components/Icon.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "2-digit",
+  year: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<BaseLayout
+  title="Blog"
+  description="Essays, frameworks, and deep-dives on product strategy, go-to-market playbooks, and the craft of positioning."
+>
+  <Container class="flex flex-col gap-10 pt-10 pb-16 md:gap-16 md:pt-20 md:pb-24">
+    <PageIntro
+      title="Writing on product strategy, go-to-market playbooks, and the craft of positioning."
+      lede="A collection of essays, frameworks, and deep-dives about the strategic mechanics behind successful product marketing campaigns."
+    />
+
+    <ul class="max-w-[1000px] border-t border-border">
+      {
+        posts.map((post) => (
+          <li class="flex flex-col gap-2 border-b border-border py-6 md:flex-row md:gap-16">
+            <div class="flex shrink-0 flex-col gap-1 md:w-[180px]">
+              <p class="text-sm whitespace-nowrap text-subtle">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {dateFormat.format(post.data.pubDate)}
+                </time>
+              </p>
+              <p class="text-xs font-medium text-accent uppercase">
+                {post.data.readingTime}
+              </p>
+            </div>
+            <div class="flex min-w-0 flex-1 flex-col gap-2">
+              <h2 class="text-lg leading-[1.4] font-semibold text-balance text-ink md:text-xl">
+                <a href={`/blog/${post.id}`} class="hover:text-accent">
+                  {post.data.title}
+                </a>
+              </h2>
+              <p class="text-[15px] leading-[1.6] text-muted">
+                {post.data.description}
+              </p>
+              <a
+                href={`/blog/${post.id}`}
+                class="group inline-flex items-center gap-1 pt-1 text-sm font-semibold text-accent"
+              >
+                {post.data.linkLabel}
+                <Icon
+                  name="chevron-right"
+                  class="transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</BaseLayout>
