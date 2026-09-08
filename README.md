@@ -58,6 +58,18 @@ hard-coded, so the header adapts as content changes:
 The hamburger is a `<details>` element, so it needs no JavaScript and keeps
 keyboard and screen-reader behaviour for free.
 
+## Project dots
+
+Each project card carries a dot in the brand colour of the company the work
+was for; the two independent projects keep their own. Values live on `:root`
+in `src/styles/global.css` as `--c-dot-*`.
+
+All three brand colours sit at roughly the same hue (~222°), and the navies
+are near-invisible on the dark background — Enumerate's `#152650` measures
+1.18:1 against `#1a1a1a`. Dark mode therefore lifts them in HSL, keeping hue
+and saturation but stepping lightness so the three blues stay distinguishable
+from each other rather than all resolving to the same tint.
+
 ## Design tokens
 
 `src/styles/global.css` holds the palette from Figma. Raw values live on `:root`

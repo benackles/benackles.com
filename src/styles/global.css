@@ -26,6 +26,14 @@
   --c-code-ink: #f4f4f5;
   --c-card-shadow: rgb(0 0 0 / 0.01);
   --c-pill-shadow: rgb(0 0 0 / 0.03);
+
+  /* Project dots: company brand colours, independents keep their own. */
+  --c-dot-bigcommerce: #0d52ff;
+  --c-dot-storyblok: #274793;
+  --c-dot-enumerate: #152650;
+  --c-dot-deck: #10b981;
+  --c-dot-meetcard: #ef4444;
+
   color-scheme: light;
 }
 
@@ -45,6 +53,16 @@
     --c-code-ink: #e4e4e7;
     --c-card-shadow: rgb(0 0 0 / 0.13);
     --c-pill-shadow: rgb(0 0 0 / 0.25);
+
+    /*
+      The brand navies are near-invisible on #1a1a1a (Enumerate lands at
+      1.18:1), so dark mode lifts them in HSL — hue and saturation intact,
+      lightness stepped so the three blues stay distinguishable.
+    */
+    --c-dot-bigcommerce: #2764ff;
+    --c-dot-storyblok: #708fd9;
+    --c-dot-enumerate: #95ace3;
+
     color-scheme: dark;
   }
 }
@@ -69,14 +87,12 @@
   /* Brand green stays constant across both themes — it is the CTA fill. */
   --color-brand: #2e6e5b;
 
-  /* Project accent dots, straight from the Figma ellipse fills. */
-  --color-dot-blue: #3b82f6;
-  --color-dot-pink: #ec4899;
-  --color-dot-green: #10b981;
-  --color-dot-amber: #f59e0b;
-  --color-dot-violet: #8b5cf6;
-  --color-dot-red: #ef4444;
-  --color-dot-teal: #14b8a6;
+  /* Project accent dots — see the --c-dot-* values above. */
+  --color-dot-bigcommerce: var(--c-dot-bigcommerce);
+  --color-dot-storyblok: var(--c-dot-storyblok);
+  --color-dot-enumerate: var(--c-dot-enumerate);
+  --color-dot-deck: var(--c-dot-deck);
+  --color-dot-meetcard: var(--c-dot-meetcard);
 }
 
 @layer base {

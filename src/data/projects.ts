@@ -1,11 +1,13 @@
+/*
+  Dots carry the brand colour of the company the work was for; the two
+  independent projects keep their own. Values live in src/styles/global.css.
+*/
 export type DotColor =
-  | "blue"
-  | "pink"
-  | "green"
-  | "amber"
-  | "violet"
-  | "red"
-  | "teal";
+  | "bigcommerce"
+  | "storyblok"
+  | "enumerate"
+  | "deck"
+  | "meetcard";
 
 export interface Project {
   eyebrow: string;
@@ -21,7 +23,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Independent · Developer Experience",
     name: "Deck Design System",
-    dot: "green",
+    dot: "deck",
     wip: true,
     summary:
       "Built a working design system in Storybook to explore component architecture, documentation, testing, and the workflows behind modern frontend development.",
@@ -31,7 +33,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Independent · Zero-to-One GTM",
     name: "MeetCard",
-    dot: "red",
+    dot: "meetcard",
     wip: true,
     summary:
       "Built the positioning, messaging, pricing, product narrative, and go-to-market foundation for a professional networking product from the ground up.",
@@ -41,7 +43,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Enumerate · AI Product Launch",
     name: "Numa AI",
-    dot: "violet",
+    dot: "enumerate",
     summary:
       "Positioned embedded AI around the work it completes, bringing five capabilities together under one clear product story.",
     linkLabel: "View Numa AI",
@@ -50,7 +52,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Storyblok · Company-level Positioning",
     name: "Storyblok",
-    dot: "teal",
+    dot: "storyblok",
     summary:
       "Built a messaging architecture that positioned the same headless CMS for developers, marketers, and enterprise buyers without fragmenting the product story.",
     linkLabel: "View storyblok.com",
@@ -59,7 +61,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "BigCommerce · Developer GTM",
     name: "Catalyst",
-    dot: "blue",
+    dot: "bigcommerce",
     summary:
       "Turned BigCommerce's composable commerce strategy into an open-source storefront developers could evaluate, adopt, and build with.",
     linkLabel: "Visit Catalyst",
@@ -68,7 +70,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "BigCommerce · Developer Education",
     name: "GraphQL Storefront API",
-    dot: "amber",
+    dot: "bigcommerce",
     summary:
       "Turned a technical API into a guided developer journey, moving from product value to implementation through a video solution series.",
     linkLabel: "Watch the series",
