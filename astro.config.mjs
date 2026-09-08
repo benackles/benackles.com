@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
 
 const LANG_LABELS = /** @type {Record<string, string>} */ ({
   md: "Markdown",
@@ -74,6 +75,7 @@ const codeBlockChrome = {
 // https://astro.build/config
 export default defineConfig({
   site: "https://benackles.com",
+  integrations: [sitemap()],
   markdown: {
     shikiConfig: {
       theme: "github-dark-default",

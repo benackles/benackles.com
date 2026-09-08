@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { NAV, SITE } from "../consts";
+import avatar from "../assets/avatar.jpg";
 
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActive = (href: string) =>
@@ -23,11 +25,13 @@ const isActive = (href: string) =>
       <span
         class="flex size-9 items-center justify-center rounded-[18px] border border-border bg-card"
       >
-        <img
-          src="/images/avatar.jpg"
+        <Image
+          src={avatar}
           alt=""
-          width="28"
-          height="28"
+          width={28}
+          height={28}
+          densities={[1, 2]}
+          loading="eager"
           class="size-7 rounded-[14px] object-cover"
         />
       </span>

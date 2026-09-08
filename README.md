@@ -19,10 +19,11 @@ npm run preview  # serve the build locally
 src/
   components/     Header, Footer, Container, PageIntro, Icon
   content/blog/   Markdown posts (the blog collection)
+  assets/         Source images, optimised at build time by astro:assets
   icons/          Brand marks not in Lucide (github, linkedin, twitter)
   data/           work.ts, projects.ts, uses.ts — page content as typed modules
   layouts/        BaseLayout.astro — html shell, meta, header/footer
-  pages/          index (about), projects, _blog/, _uses.astro
+  pages/          index (about), projects, 404, _blog/, _uses.astro
   styles/         global.css — design tokens + Tailwind theme
   consts.ts       site metadata, nav, social links
   content.config.ts
@@ -67,9 +68,27 @@ icons in v1, so `github`, `linkedin` and `twitter` are local SVGs in
 to Lucide's weight at 16px. If you ever want filled brand logos instead, that
 is a `simple-icons` dependency.
 
-## Favicons
+## Generated assets
 
-Generated from `public/images/avatar.jpg` — face-cropped, circular-masked:
+Both are committed, not built on deploy, so Netlify does no extra work.
+
+### Social card
+
+`public/og.jpg`, 1200x630. Rendered by screenshotting the `/og-card` route
+with headless Chrome so it uses the real Inter webfont and the real tokens:
+
+```bash
+npm run dev   # in one shell
+npm run og    # in another
+```
+
+[scripts/generate-og.js](scripts/generate-og.js) un-parks
+`src/pages/_og-card.astro` for the capture and re-parks it afterwards, so the
+card never ships as a public route. Edit that page to change the card.
+
+### Favicons
+
+Generated from `src/assets/avatar.jpg` — face-cropped, circular-masked:
 
 ```bash
 npm run favicons
@@ -79,7 +98,7 @@ npm run favicons
 `favicon.svg` (scalable, JPEG payload in a circular clip), `favicon.ico`
 (16/32/48), `favicon-32.png`, and `apple-touch-icon.png` (180px, on the site
 background since iOS ignores alpha). Adjust `CROP` in that script if you swap
-the photo, then re-run it — the outputs are committed, not built on deploy.
+the photo, then re-run it.
 
 ## Content
 

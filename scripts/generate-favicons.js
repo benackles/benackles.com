@@ -1,12 +1,12 @@
 /*
- * Builds the circular-masked favicon set from public/images/avatar.jpg.
+ * Builds the circular-masked favicon set from src/assets/avatar.jpg.
  * Run from the project root:  npm run favicons
  */
 import sharp from "sharp";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const SRC = "public/images/avatar.jpg";
+const SRC = "src/assets/avatar.jpg";
 const OUT = "public";
 
 // Face-centred square crop of the 400x400 source, so the circle still

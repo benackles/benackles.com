@@ -1,0 +1,89 @@
+---
+/*
+  Source for public/og.jpg — the 1200x630 social card.
+
+  This is a page rather than a generated image so the card uses the real
+  Inter webfont and the real design tokens. To regenerate: rename this
+  file to og-card.astro (drop the underscore), run `npm run dev`, screenshot
+  http://localhost:4321/og-card at exactly 1200x630, save it as
+  public/og.jpg, then put the underscore back so it stops being a route.
+*/
+import { readFile } from "node:fs/promises";
+import "../styles/global.css";
+import { SITE } from "../consts";
+
+// Inlined as a data URI so the capture never races the image request.
+const avatarDataUri = `data:image/jpeg;base64,${(
+  await readFile("src/assets/avatar.jpg")
+).toString("base64")}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OG card</title>
+    <style is:global>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /*
+        The card is a fixed asset, so pin it to the light palette rather
+        than inheriting whatever colour scheme the renderer happens to
+        report. Headless Chrome defaults to dark.
+      */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --c-bg: #faf8f4;
+          --c-surface: #f4f4f5;
+          --c-card: #faf8f4;
+          --c-border: #d9d2c7;
+          --c-ink: #18181b;
+          --c-muted: #52525b;
+          --c-subtle: #71717a;
+          --c-accent: #2e6e5b;
+        }
+      }
+
+      /* Keep the dev toolbar out of the capture. */
+      astro-dev-toolbar {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="flex h-[630px] w-[1200px] items-center gap-16 overflow-hidden bg-bg px-24"
+    >
+      <div class="flex flex-1 flex-col gap-7">
+        <p
+          class="text-[18px] font-bold tracking-[2px] text-accent uppercase"
+        >
+          {SITE.author}
+        </p>
+        <p
+          class="text-[64px] leading-[1.1] font-extrabold tracking-[-0.02em] text-ink"
+        >
+          I help technical products find their market.
+        </p>
+        <p class="text-[24px] leading-[1.5] text-muted">
+          Positioning, messaging, and go-to-market for developer tools.
+        </p>
+        <p class="pt-2 text-[20px] font-semibold text-accent">benackles.com</p>
+      </div>
+
+      <div class="shrink-0">
+        <img
+          src={avatarDataUri}
+          alt=""
+          width="320"
+          height="320"
+          class="size-[320px] rounded-full border-[6px] border-border object-cover"
+        />
+      </div>
+    </div>
+  </body>
+</html>

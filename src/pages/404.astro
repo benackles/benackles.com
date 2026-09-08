@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page doesn't exist — it may have moved, or never existed."
+>
+  <Container class="flex flex-col gap-12 pt-16 pb-24 md:gap-16 md:pt-28 md:pb-32">
+    <div class="flex max-w-[820px] flex-col gap-6">
+      <p class="eyebrow">Error 404</p>
+      <h1
+        class="text-[36px] leading-[1.15] font-extrabold tracking-[-0.01em] text-ink md:text-[56px]"
+      >
+        This page went to market without us.
+      </h1>
+      <p class="text-base leading-[1.6] text-muted md:text-[18px]">
+        The link may be out of date, or the page may not have shipped yet.
+        Everything that is live is one click away.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a
+          href="/"
+          class="group inline-flex items-center gap-1 rounded-[20px] border border-border bg-brand px-5 py-2 text-[13px] font-medium text-white transition-opacity hover:opacity-90"
+        >
+          Back to the homepage
+          <Icon
+            name="chevron-right"
+            class="transition-transform group-hover:translate-x-0.5"
+          />
+        </a>
+        <a
+          href="/projects"
+          class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
+        >
+          See selected work
+          <Icon
+            name="chevron-right"
+            class="transition-transform group-hover:translate-x-0.5"
+          />
+        </a>
+      </div>
+    </div>
+  </Container>
+</BaseLayout>
