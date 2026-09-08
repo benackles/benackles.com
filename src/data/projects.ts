@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Built the design system behind MeetCard, using Figma and Storybook to connect design and development, standardize reusable components, and ship product faster with consistency.",
     linkLabel: "Explore Deck",
-    href: "https://deck.meetcard.io/",
+    href: "https://dub.sh/IMBS33e",
   },
   {
     eyebrow: "Independent · Zero-to-One GTM",
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Built a networking product from concept to market, spanning product strategy, UX, development, positioning, messaging, pricing, and go-to-market.",
     linkLabel: "Preview MeetCard.io",
-    href: "https://beta.meetcard.io/",
+    href: "https://dub.sh/UTaYGJJ",
   },
   {
     eyebrow: "Enumerate · AI Product Launch",
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Helped introduce agentic workflows into an established SaaS platform, unifying five AI capabilities into one clear product story focused on completed work, not just assistance.",
     linkLabel: "View Numa AI",
-    href: "https://goenumerate.com/products/numa-ai",
+    href: "https://dub.sh/LcRtkwY",
   },
   {
     eyebrow: "Storyblok · Company-level Positioning",
@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Led a company-wide repositioning and rebrand to break through a crowded headless CMS market, sharpening the category story, messaging architecture, and value proposition across developers, marketers, and enterprise buyers.",
     linkLabel: "View storyblok.com",
-    href: "https://www.storyblok.com",
+    href: "https://dub.sh/Te5acgB",
   },
   {
     eyebrow: "BigCommerce · Developer GTM",
@@ -64,7 +64,7 @@ export const PROJECTS: Project[] = [
     summary:
       "Led GTM for a major developer initiative to accelerate headless storefront builds, shaping the positioning, launch strategy, partner adoption, and developer story around a composable reference storefront.",
     linkLabel: "Visit Catalyst",
-    href: "https://www.catalyst.dev",
+    href: "https://dub.sh/LGdyGTp",
   },
   {
     eyebrow: "BigCommerce · Developer Education",
@@ -73,6 +73,6 @@ export const PROJECTS: Project[] = [
     summary:
       "Revived a stalled developer release, brought Cart & Checkout into the story, and helped turn the API into a clearer path to headless commerce ahead of Catalyst.",
     linkLabel: "Watch the series",
-    href: "https://www.youtube.com/watch?v=BSU3ufg8-wU",
+    href: "https://dub.sh/DBIoDaX",
   },
 ];
