@@ -1,5 +1,12 @@
 import type { IconName } from "./components/Icon.astro";
 
+/*
+  The "Book a time" CTA is parked until scheduling is set up. Flip this to
+  true to bring it back — the header also uses it for layout: with a CTA the
+  nav sits centred, without one it moves to the right corner.
+*/
+export const SHOW_BOOKING_CTA = false;
+
 export const SITE = {
   title: "Ben Ackles",
   url: "https://benackles.com",

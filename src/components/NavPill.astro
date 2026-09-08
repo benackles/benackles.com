@@ -1,0 +1,40 @@
+---
+import { NAV } from "../consts";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+---
+
+<nav
+  aria-label="Primary"
+  class:list={[
+    "rounded-[99px] border border-border bg-surface px-4 py-2.5 drop-shadow-[0_1px_1.5px_var(--c-pill-shadow)]",
+    className,
+  ]}
+>
+  <ul class="flex items-center gap-5 text-sm font-medium md:gap-6">
+    {
+      NAV.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "whitespace-nowrap transition-colors hover:text-accent",
+              isActive(item.href) ? "text-accent" : "text-muted",
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

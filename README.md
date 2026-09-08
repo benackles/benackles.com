@@ -35,13 +35,28 @@ Three things are built but switched off, each restorable in one or two edits:
 
 | Feature          | Where it is                                    | To restore                                                       |
 | ---------------- | ---------------------------------------------- | ---------------------------------------------------------------- |
-| "Book a time" CTA | `src/components/Header.astro`, in a `{/* */}` block | Uncomment; set `SITE.bookingUrl` in `src/consts.ts`               |
+| "Book a time" CTA | `SHOW_BOOKING_CTA` in `src/consts.ts`           | Set it to `true`; set `SITE.bookingUrl` alongside it              |
 | Blog             | `src/pages/_blog/`                             | Rename to `blog/`, uncomment its line in `NAV` (`src/consts.ts`)  |
 | Uses             | `src/pages/_uses.astro`                        | Rename to `uses.astro`, uncomment its line in `NAV`               |
 
 Astro skips underscore-prefixed files and folders when building routes, so the
 pages stay in the repo, keep type-checking, and generate no URLs. The blog's
 markdown and content collection are untouched.
+
+## Header behaviour
+
+Two things in `src/components/Header.astro` are driven by data rather than
+hard-coded, so the header adapts as content changes:
+
+- **Nav placement** — with the CTA on, the pill sits centred as in the Figma
+  design; with it off, the pill moves to the right corner instead of leaving a
+  dead column. Driven by `SHOW_BOOKING_CTA`.
+- **Mobile nav** — up to two items stay visible inline; a third collapses them
+  behind a hamburger in the right corner. Driven by `NAV.length` against
+  `INLINE_NAV_MAX`.
+
+The hamburger is a `<details>` element, so it needs no JavaScript and keeps
+keyboard and screen-reader behaviour for free.
 
 ## Design tokens
 
