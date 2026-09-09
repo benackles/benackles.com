@@ -1,0 +1,276 @@
+---
+/**
+ * BuildLoop.astro — how benackles.com gets built.
+ *
+ * Replaces the office photo on the home page. Built from HTML + CSS rather
+ * than an SVG on purpose: an SVG's text scales with its viewBox, so a drawing
+ * sized for the 764px desktop column renders ~7px type in the 350px mobile
+ * column. Here the labels are real text at real CSS sizes, so they stay
+ * legible at every width (and stay selectable and translatable).
+ *
+ * Every colour is a --c-* token from global.css, so light and dark are
+ * already handled by the prefers-color-scheme swap there. There is no
+ * second palette in this file and nothing to keep in sync.
+ */
+
+interface Props {
+  caption?: boolean;
+  class?: string;
+}
+
+const { caption = true, class: className = "" } = Astro.props;
+
+const STAGES = [
+  { name: "Figma", role: "design system" },
+  { name: "Claude Code", role: "the translation", accent: true },
+  { name: "Astro + Tailwind", role: "static build" },
+  { name: "GitHub", role: "main branch" },
+  { name: "Netlify", role: "benackles.com" },
+];
+
+const EDGES = [
+  "brand + mockups",
+  "writes the code",
+  "commit + push",
+  "build hook",
+];
+
+const ALT =
+  "How this site gets built: Figma holds the design system and hands brand " +
+  "and mockups to Claude Code, which writes the code into an Astro and " +
+  "Tailwind static build. That is committed and pushed to the GitHub main " +
+  "branch, which fires a build hook to Netlify, serving benackles.com. A " +
+  "return path runs from the live site back to Claude Code — review, revise, " +
+  "re-ship.";
+---
+
+<figure class:list={["bl", className]}>
+  <div class="bl-frame">
+    <div class="bl-stack" role="img" aria-label={ALT}>
+      <span class="bl-rail" aria-hidden="true"><i class="bl-rail-tip"></i></span>
+      <span class="bl-rail-label" aria-hidden="true"
+        >review &#8594; revise &#8594; re-ship</span
+      >
+
+      {
+        STAGES.map((stage, i) => (
+          <>
+            <div class:list={["bl-node", stage.accent && "bl-node--accent"]}>
+              <span class="bl-name">{stage.name}</span>
+              <span class="bl-role">{stage.role}</span>
+            </div>
+            {i < EDGES.length && (
+              <div class="bl-edge">
+                <i class="bl-edge-line" />
+                <i class="bl-edge-tip" />
+                <span class="bl-edge-label">{EDGES[i]}</span>
+              </div>
+            )}
+          </>
+        ))
+      }
+    </div>
+  </div>
+
+  {
+    caption && (
+      <figcaption class="bl-caption">
+        <b>How this site gets built.</b> Design goes in at the top, a live page
+        comes out at the bottom, and the highlighted path is the part that used
+        to need an engineering handoff.
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .bl {
+    margin: 0;
+  }
+
+  .bl-frame {
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: 24px;
+    padding: 26px 18px;
+  }
+
+  .bl-stack {
+    --row-h: 54px;
+    --gap: 28px;
+    --rail-w: 38px;
+
+    /* Nodes stretched to the full 604-764px column read as a settings list,
+       not a diagram. Capping the stack keeps the bar proportions the same at
+       every breakpoint; the frame stays full-width like the photo did. */
+    max-width: 470px;
+    margin-inline: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--rail-w);
+  }
+
+  /* ---- stages ---- */
+
+  .bl-node {
+    height: var(--row-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 16px;
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    background: var(--c-surface);
+  }
+
+  .bl-node--accent {
+    border-color: var(--c-accent);
+    background: var(--c-badge);
+  }
+
+  .bl-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--c-ink);
+    white-space: nowrap;
+  }
+
+  .bl-node--accent .bl-name {
+    color: var(--c-accent);
+  }
+
+  .bl-role {
+    font-size: 13px;
+    color: var(--c-subtle);
+    white-space: nowrap;
+  }
+
+  /* ---- forward edges ---- */
+
+  .bl-edge {
+    height: var(--gap);
+    position: relative;
+  }
+
+  .bl-edge-line {
+    position: absolute;
+    left: 50%;
+    margin-left: -0.75px;
+    top: 0;
+    height: calc(100% - 7px);
+    width: 1.5px;
+    background: var(--c-subtle);
+  }
+
+  .bl-edge-tip {
+    position: absolute;
+    left: 50%;
+    margin-left: -3.5px;
+    bottom: 1px;
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid var(--c-subtle);
+    border-bottom: 1.5px solid var(--c-subtle);
+    transform: rotate(45deg);
+  }
+
+  .bl-edge-label {
+    position: absolute;
+    left: calc(50% + 16px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12.5px;
+    color: var(--c-muted);
+    white-space: nowrap;
+  }
+
+  /* ---- the return path: stage 2's centre, around the left, to stage 5's ---- */
+
+  .bl-rail {
+    position: absolute;
+    left: 0;
+    width: var(--rail-w);
+    top: calc(var(--row-h) * 1.5 + var(--gap));
+    height: calc(3 * (var(--row-h) + var(--gap)));
+    border: 1.5px solid var(--c-accent);
+    border-right: 0;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .bl-rail-tip {
+    position: absolute;
+    right: -1px;
+    top: -3.5px;
+    width: 6px;
+    height: 6px;
+    border-top: 1.5px solid var(--c-accent);
+    border-right: 1.5px solid var(--c-accent);
+    transform: rotate(45deg);
+  }
+
+  .bl-rail-label {
+    position: absolute;
+    left: 0;
+    width: var(--rail-w);
+    top: calc(var(--row-h) * 1.5 + var(--gap));
+    height: calc(3 * (var(--row-h) + var(--gap)));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--c-accent);
+    pointer-events: none;
+  }
+
+  /* ---- caption ---- */
+
+  .bl-caption {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--c-subtle);
+  }
+
+  .bl-caption b {
+    font-weight: 600;
+    color: var(--c-muted);
+  }
+
+  @media (min-width: 768px) {
+    .bl-frame {
+      padding: 34px 26px;
+    }
+
+    .bl-stack {
+      --row-h: 58px;
+      --gap: 30px;
+      --rail-w: 44px;
+    }
+
+    .bl-name {
+      font-size: 16px;
+    }
+
+    .bl-role {
+      font-size: 13.5px;
+    }
+
+    .bl-edge-label {
+      font-size: 13px;
+    }
+
+    .bl-rail-label {
+      font-size: 12.5px;
+    }
+
+    .bl-caption {
+      font-size: 13.5px;
+    }
+  }
+</style>
