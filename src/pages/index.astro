@@ -1,10 +1,9 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 import Icon from "../components/Icon.astro";
+import BuildLoop from "../components/BuildLoop.astro";
 import { WORK, CURRENTLY_BUILDING } from "../data/work";
-import office from "../assets/office.jpg";
 ---
 
 <BaseLayout>
@@ -24,17 +23,7 @@ import office from "../assets/office.jpg";
 
     <div class="flex flex-col gap-10 lg:flex-row lg:gap-16">
       <div class="flex flex-1 flex-col gap-8 md:gap-10">
-        <div class="h-80 overflow-hidden rounded-3xl md:h-[440px]">
-          <Image
-            src={office}
-            alt="A corner of Ben's home office: framed mountaineering photographs and two painted portraits of his dogs above a bookshelf."
-            widths={[400, 800, 1200, 1600]}
-            sizes="(min-width: 1024px) 764px, (min-width: 768px) 100vw, 350px"
-            loading="eager"
-            fetchpriority="high"
-            class="size-full object-cover"
-          />
-        </div>
+        <BuildLoop />
 
         <div class="flex flex-col gap-6 text-base leading-[1.75] text-muted">
           <p>
@@ -48,12 +37,7 @@ import office from "../assets/office.jpg";
             to be true for people to adopt it.
           </p>
           <p>
-            My sweet spot is technical products. At BigCommerce, I worked on
-            developer-facing products including GraphQL APIs, App Extensions,
-            and Catalyst, an open-source storefront framework. At Storyblok, I
-            built messaging for a headless CMS across developer, marketer, and
-            enterprise audiences. More recently, I've worked on bringing AI
-            capabilities to market inside an established SaaS platform.
+            My sweet spot is technical products. At BigCommerce, I worked on developer-facing products including GraphQL APIs, App Extensions, and Catalyst, an open-source storefront framework. At Storyblok, I led a company-wide positioning initiative to sharpen how the headless CMS differentiated in a crowded market, then translated that positioning into messaging for developer, marketer, and enterprise audiences. More recently, I’ve worked on bringing AI capabilities to market inside an established SaaS platform.
           </p>
         </div>
       </div>
