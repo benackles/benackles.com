@@ -1,10 +1,16 @@
 # Netlify's GitHub App subscription for this site never registered correctly
 # — the site record was created through the raw API, and reconnecting in the
-# UI no-ops because Netlify already considers the repo linked. Until that is
-# repaired, pushes are deployed by calling a build hook explicitly.
+# UI no-ops because Netlify already considers the repo linked. That left
+# Netlify unable to clone the repo at build time ("Host key verification
+# failed"), so builds triggered by a hook died before they started.
 #
-# The hook URL lives in the NETLIFY_BUILD_HOOK repo secret. Anyone holding it
-# can trigger a production build, so it must not be committed.
+# Rather than depend on Netlify's clone at all, this workflow builds the site
+# here and uploads the finished dist/ directory. Netlify never touches the
+# repository, which removes that whole class of failure.
+#
+# Requires the NETLIFY_AUTH_TOKEN repo secret (a personal access token from
+# Netlify → User settings → Applications). The site ID is not sensitive — it
+# appears in the site's admin URL — so it lives here in plain text.
 name: Deploy
 
 on:
@@ -12,24 +18,39 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# A newer push supersedes an in-flight run; no point building a stale commit.
+# A newer push supersedes an in-flight run; no point deploying a stale commit.
 concurrency:
   group: netlify-deploy
   cancel-in-progress: true
 
 jobs:
-  trigger:
-    name: Trigger Netlify build
+  deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Call the build hook
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Netlify
         env:
-          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 8e68f2f3-c8e2-482b-bc65-dacdd5a3bba4
         run: |
-          if [ -z "$HOOK" ]; then
-            echo "NETLIFY_BUILD_HOOK is not set on this repository." >&2
+          if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+            echo "NETLIFY_AUTH_TOKEN is not set on this repository." >&2
             exit 1
           fi
-          curl --fail --silent --show-error --request POST \
-            --data '{}' "$HOOK" > /dev/null
-          echo "Netlify build triggered for ${GITHUB_SHA:0:7}."
+          npx --yes netlify-cli@27 deploy \
+            --prod \
+            --dir=dist \
+            --message "${GITHUB_SHA:0:7} — ${GITHUB_REF_NAME}"
