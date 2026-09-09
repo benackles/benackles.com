@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
     <div
       class="flex flex-col gap-4 px-5 py-10 text-sm sm:flex-row sm:items-center sm:justify-between md:px-24 md:py-12"
     >
-      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
         <ul class="flex flex-wrap gap-5 text-muted">
           {
             NAV.map((item) => (
@@ -26,13 +26,23 @@ const year = new Date().getFullYear();
           {
             SOCIALS.map((social) => (
               <li>
+                {/*
+                  The chip is the 20px box the design specifies, but a 20px
+                  hit area is under the 24px minimum for a pointer target, so
+                  the padding on the anchor takes it to 36px and the negative
+                  margin keeps the chip sitting on the design's 20px rhythm.
+                */}
                 <a
                   href={social.href}
                   aria-label={social.label}
                   rel="me noopener"
-                  class="flex size-9 items-center justify-center rounded-[18px] border border-border bg-surface text-muted transition-colors hover:text-accent"
+                  class="-m-2 flex p-2 text-muted transition-colors hover:text-accent"
                 >
-                  <Icon name={social.icon} />
+                  <span
+                    class="flex size-5 items-center justify-center rounded-[18px] border border-border bg-surface"
+                  >
+                    <Icon name={social.icon} />
+                  </span>
                 </a>
               </li>
             ))

@@ -77,7 +77,14 @@
     outlined control, so the pill softens it. Dark mode takes --c-border as
     is — see the note there.
   */
-  --c-nav-border: color-mix(in oklab, var(--c-border) 60%, transparent);
+  --c-nav-border: color-mix(in oklab, var(--c-border) 20%, transparent);
+
+  /*
+    Inactive nav labels. Light uses --c-muted rather than the --c-subtle the
+    Figma file specifies: at #a1a1aa the labels land near 2.3:1 on the pill,
+    short of AA. Dark can afford --c-subtle, which is what the file asks for.
+  */
+  --c-nav-item: var(--c-muted);
 
   /* Project dots: company brand colours; Ben's own work uses Signal green. */
   --c-dot-bigcommerce: #0d52ff;
@@ -112,6 +119,7 @@
       light theme uses.
     */
     --c-nav-border: var(--c-border);
+    --c-nav-item: var(--c-subtle);
 
     /*
       The brand navies are near-invisible on #1a1a1a (Enumerate lands at
@@ -136,6 +144,7 @@
   --color-card: var(--c-card);
   --color-border: var(--c-border);
   --color-nav-border: var(--c-nav-border);
+  --color-nav-item: var(--c-nav-item);
   --color-ink: var(--c-ink);
   --color-muted: var(--c-muted);
   --color-subtle: var(--c-subtle);

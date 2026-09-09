@@ -28,7 +28,9 @@ const isActive = (href: string) =>
             aria-current={isActive(item.href) ? "page" : undefined}
             class:list={[
               "whitespace-nowrap transition-colors hover:text-accent",
-              isActive(item.href) ? "text-accent" : "text-muted",
+              isActive(item.href)
+                ? "font-bold text-accent"
+                : "text-nav-item",
             ]}
           >
             {item.label}
