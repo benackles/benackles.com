@@ -183,6 +183,22 @@
   }
 }
 
+/*
+  Inline links in body copy. Matches the treatment the blog template
+  already defines for prose links, so the two stay in step.
+*/
+@utility prose-link {
+  font-weight: 600;
+  color: var(--c-accent);
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
+  transition: color 150ms;
+
+  &:hover {
+    color: var(--c-ink);
+  }
+}
+
 @utility eyebrow {
   font-size: 10px;
   font-weight: 500;
