@@ -71,6 +71,14 @@
   --c-card-shadow: rgb(0 0 0 / 0.01);
   --c-pill-shadow: rgb(0 0 0 / 0.03);
 
+  /*
+    The nav pill's outline, kept separate from --c-border so the two themes
+    can diverge: on the light ground the full border reads as a hard
+    outlined control, so the pill softens it. Dark mode takes --c-border as
+    is — see the note there.
+  */
+  --c-nav-border: color-mix(in oklab, var(--c-border) 60%, transparent);
+
   /* Project dots: company brand colours; Ben's own work uses Signal green. */
   --c-dot-bigcommerce: #0d52ff;
   --c-dot-storyblok: #274793;
@@ -86,7 +94,7 @@
     --c-bg: #1a1a1a;
     --c-surface: #18181b;
     --c-card: #18181b;
-    --c-border: #27272a;
+    --c-border: #3f3f46;
     --c-ink: #fafafa;
     --c-muted: #a1a1aa;
     --c-subtle: #71717a;
@@ -97,6 +105,13 @@
     --c-code-ink: #e4e4e7;
     --c-card-shadow: rgb(0 0 0 / 0.13);
     --c-pill-shadow: rgb(0 0 0 / 0.25);
+
+    /*
+      Dark mode carries the full border weight — #3f3f46 is already the
+      lifted value, so the pill takes it undiluted rather than the 60% the
+      light theme uses.
+    */
+    --c-nav-border: var(--c-border);
 
     /*
       The brand navies are near-invisible on #1a1a1a (Enumerate lands at
@@ -120,6 +135,7 @@
   --color-surface: var(--c-surface);
   --color-card: var(--c-card);
   --color-border: var(--c-border);
+  --color-nav-border: var(--c-nav-border);
   --color-ink: var(--c-ink);
   --color-muted: var(--c-muted);
   --color-subtle: var(--c-subtle);

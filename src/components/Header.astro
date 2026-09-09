@@ -10,27 +10,24 @@ const isActive = (href: string) =>
   href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
 
 /*
-  Up to two items fit comfortably in the pill on a 390px screen, so they
-  stay visible. Beyond that they collapse behind a hamburger in the right
-  corner. Adding a third entry to NAV flips this on its own.
+  Two items fit alongside the booking CTA down to a 360px screen, so they
+  stay visible rather than collapsing into a hamburger — the nav is the
+  cheaper thing to keep one tap away. Beyond two they collapse behind a
+  hamburger in the right corner; adding a third entry to NAV flips this on
+  its own. The CTA is the binding constraint here: without it there is room
+  for three, but the count is kept at two so toggling SHOW_BOOKING_CTA
+  never overflows the header.
 */
 const INLINE_NAV_MAX = 2;
 const navFitsInline = NAV.length <= INLINE_NAV_MAX;
 const navPillClass = navFitsInline ? undefined : "hidden md:block";
-
-/*
-  The nav is centred only when the CTA balances it on the right, as in the
-  Figma design. With no CTA it would leave a dead right-hand column, so it
-  moves to the right corner instead — where the hamburger sits.
-*/
-const centreNav = SHOW_BOOKING_CTA;
 ---
 
 <header class="bg-bg">
   <div
-    class="mx-auto grid w-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 py-4 md:px-24 md:py-6"
+    class="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-3 px-5 py-4 md:px-24 md:py-6"
   >
-    <a href="/" class="justify-self-start" aria-label={`${SITE.author} — home`}>
+    <a href="/" aria-label={`${SITE.author} — home`}>
       <span
         class="flex size-[56px] items-center justify-center rounded-[28px] border border-border bg-card"
       >
@@ -46,18 +43,14 @@ const centreNav = SHOW_BOOKING_CTA;
       </span>
     </a>
 
-    <div class="justify-self-center">
-      {centreNav && <NavPill class={navPillClass} />}
-    </div>
-
-    <div class="flex items-center gap-3 justify-self-end">
-      {!centreNav && <NavPill class={navPillClass} />}
+    <div class="flex items-center gap-3">
+      <NavPill class={navPillClass} />
 
       {
         SHOW_BOOKING_CTA && (
           <a
             href={SITE.bookingUrl}
-            class="shrink-0 rounded-[20px] border border-border bg-brand px-4 py-1.5 text-[13px] font-medium whitespace-nowrap text-white transition-opacity hover:opacity-90 md:px-5 md:py-2"
+            class="shrink-0 rounded-[20px] border border-border bg-brand px-3 py-2.5 text-[13px] leading-5 font-medium whitespace-nowrap text-white transition-opacity hover:opacity-90 md:px-5"
           >
             Book a time
           </a>

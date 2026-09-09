@@ -2,8 +2,10 @@ import type { IconName } from "./components/Icon.astro";
 
 /*
   The "Book a time" CTA is parked until scheduling is set up. Flip this to
-  true to bring it back — the header also uses it for layout: with a CTA the
-  nav sits centred, without one it moves to the right corner.
+  true to bring it back; the header needs no other change, because the nav
+  pill and the CTA share one right-aligned group. With the CTA present the
+  nav sits immediately to its left, and without it the nav takes the corner
+  the CTA would have occupied.
 */
 export const SHOW_BOOKING_CTA = false;
 
