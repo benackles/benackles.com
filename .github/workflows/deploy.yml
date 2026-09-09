@@ -1,16 +1,20 @@
-# Netlify's GitHub App subscription for this site never registered correctly
-# — the site record was created through the raw API, and reconnecting in the
-# UI no-ops because Netlify already considers the repo linked. That left
-# Netlify unable to clone the repo at build time ("Host key verification
-# failed"), so builds triggered by a hook died before they started.
+# Builds the site here and uploads the finished dist/ to Netlify. Netlify
+# runs no build of its own and never clones the repository, so the netlify.toml
+# [build] section is unused — but its [[headers]] rules still ship, because the
+# CLI sends that config along with the deploy.
 #
-# Rather than depend on Netlify's clone at all, this workflow builds the site
-# here and uploads the finished dist/ directory. Netlify never touches the
-# repository, which removes that whole class of failure.
+# Why not let Netlify build from git: its GitHub App subscription for this site
+# never registered correctly (the site record was created through the raw API,
+# and reconnecting in the UI no-ops because Netlify already considers the repo
+# linked). Netlify could not clone at build time — "Host key verification
+# failed" — so builds died at the preparing-repo stage no matter how they were
+# triggered. Uploading a finished build removes the clone from the path
+# entirely. If that link is ever repaired, this workflow can go away.
 #
-# Requires the NETLIFY_AUTH_TOKEN repo secret (a personal access token from
-# Netlify → User settings → Applications). The site ID is not sensitive — it
-# appears in the site's admin URL — so it lives here in plain text.
+# Requires the NETLIFY_AUTH_TOKEN repo secret: a personal access token from
+# Netlify → User settings → Applications. It is account-scoped, not site-scoped.
+# The site ID is not sensitive — it appears in the site's admin URL — so it
+# lives here in plain text.
 name: Deploy
 
 on:
