@@ -13,7 +13,7 @@ export const SITE = {
   title: "Ben Ackles",
   url: "https://benackles.com",
   description:
-    "Ben Ackles is a product marketer in Boulder, Colorado working on positioning, messaging, and go-to-market strategy for technical products.",
+    "Ben Ackles is a product marketer and builder in Boulder, Colorado working on positioning, messaging, and go-to-market strategy for technical products.",
   author: "Ben Ackles",
   bookingUrl: "https://cal.com/benackles",
 } as const;
