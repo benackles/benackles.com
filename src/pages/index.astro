@@ -18,10 +18,46 @@ import { WORK, CURRENTLY_BUILDING } from "../data/work";
       lede="I'm Ben Ackles, a product marketer and builder in Boulder, Colorado. I work across positioning, messaging, and go-to-market strategy, with a particular focus on products built for developers and technical teams."
     />
 
+    {/*
+      The page argues in two moves: the marketer first, then the builder.
+      This block carries the career story with the Work card alongside it as
+      evidence; the builder block below picks up the transition line.
+    */}
     <div class="flex flex-col gap-10 lg:flex-row lg:gap-16">
-      <div class="flex flex-1 flex-col gap-8 md:gap-10">
-        <BuildLoop />
+      <div class="flex flex-col gap-8 lg:order-2 lg:w-[420px] lg:shrink-0">
+        <section
+          class="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6"
+        >
+          <h2 class="flex items-center gap-2 text-sm font-semibold text-ink">
+            <Icon name="briefcase-business" class="text-muted" />
+            Work
+          </h2>
+          <ul class="flex flex-col gap-4">
+            {
+              WORK.map((job) => (
+                <li class="flex items-center gap-3">
+                  <span class="flex size-10 shrink-0 items-center justify-center rounded-[20px] border border-border bg-card text-ink">
+                    <Icon name={job.icon} />
+                  </span>
+                  <span class="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <span class="truncate text-sm font-semibold text-ink">
+                      {job.company}
+                    </span>
+                    <span class="text-[13px] text-muted md:truncate">
+                      {job.role}
+                    </span>
+                  </span>
+                  <span class="shrink-0 text-xs whitespace-nowrap text-subtle">
+                    {job.period}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
 
+      <div class="flex flex-1 flex-col gap-8 md:gap-10 lg:order-1">
         <div class="flex flex-col gap-6 text-base leading-[1.75] text-muted">
           <p>
             I've spent my career helping companies turn complicated products
@@ -55,41 +91,27 @@ import { WORK, CURRENTLY_BUILDING } from "../data/work";
           </p>
         </div>
       </div>
+    </div>
 
-      <div class="flex flex-col gap-8 lg:w-[420px] lg:shrink-0">
-        <section
-          class="flex flex-col gap-5 rounded-2xl border border-border bg-card p-6"
-        >
-          <h2 class="flex items-center gap-2 text-sm font-semibold text-ink">
-            <Icon name="briefcase-business" class="text-muted" />
-            Work
-          </h2>
-          <ul class="flex flex-col gap-4">
-            {
-              WORK.map((job) => (
-                <li class="flex items-center gap-3">
-                  <span class="flex size-10 shrink-0 items-center justify-center rounded-[20px] border border-border bg-card text-ink">
-                    <Icon name={job.icon} />
-                  </span>
-                  <span class="flex min-w-0 flex-1 flex-col gap-0.5">
-                    <span class="truncate text-sm font-semibold text-ink">
-                      {job.company}
-                    </span>
-                    <span class="text-[13px] text-muted md:truncate">
-                      {job.role}
-                    </span>
-                  </span>
-                  <span class="shrink-0 text-xs whitespace-nowrap text-subtle">
-                    {job.period}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+    {/*
+      The builder half. The transition line leads in, the diagram carries the
+      argument, and Currently Building sits beside it as corroboration rather
+      than a second focal point. Source order puts the diagram first so the
+      mobile stack reads transition → diagram → card.
+    */}
+    <div class="flex flex-col gap-6 md:gap-8">
+      <p class="max-w-[820px] text-base leading-[1.75] text-muted">
+        I also like getting close to how products are actually built. This site
+        is one small example.
+      </p>
+
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+        <div class="flex-1">
+          <BuildLoop />
+        </div>
 
         <section
-          class="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6"
+          class="flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 lg:w-[420px] lg:shrink-0"
         >
           <h2 class="text-xs font-bold tracking-wide text-accent uppercase">
             Currently Building
