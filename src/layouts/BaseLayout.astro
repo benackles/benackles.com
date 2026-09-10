@@ -11,6 +11,12 @@ import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal
 
 interface Props {
   title?: string;
+  /**
+   * Set when `title` is already a complete, SEO-written title carrying its
+   * own branding. Without this a title is treated as a page name and takes
+   * the " — Ben Ackles" suffix, which is what 404 and posts want.
+   */
+  standaloneTitle?: boolean;
   description?: string;
   /** Overrides the default social card, e.g. for a post. */
   image?: string;
@@ -18,11 +24,16 @@ interface Props {
 
 const {
   title,
+  standaloneTitle = false,
   description = SITE.description,
   image = "/og.jpg",
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const pageTitle = !title
+  ? SITE.title
+  : standaloneTitle
+    ? title
+    : `${title} — ${SITE.title}`;
 const site = Astro.site ?? new URL(SITE.url);
 const canonical = new URL(Astro.url.pathname, site);
 const ogImage = new URL(image, site);
