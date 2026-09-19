@@ -31,10 +31,10 @@ const year = new Date().getFullYear();
             SOCIALS.map((social) => (
               <li>
                 {/*
-                  The chip is the 20px box the design specifies, but a 20px
-                  hit area is under the 24px minimum for a pointer target, so
-                  the padding on the anchor takes it to 36px and the negative
-                  margin keeps the chip sitting on the design's 20px rhythm.
+                  The icon sits bare beside the text links. At 16px it is under
+                  the 24px minimum for a pointer target, so the anchor pads out
+                  to 32px and the negative margin keeps the visible glyph on
+                  the row's 20px rhythm.
                 */}
                 <a
                   href={social.href}
@@ -42,11 +42,7 @@ const year = new Date().getFullYear();
                   rel="me noopener"
                   class="-m-2 flex p-2 text-muted transition-colors hover:text-accent"
                 >
-                  <span
-                    class="flex size-5 items-center justify-center rounded-[18px] border border-border bg-surface"
-                  >
-                    <Icon name={social.icon} />
-                  </span>
+                  <Icon name={social.icon} />
                 </a>
               </li>
             ))
