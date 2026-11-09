@@ -10,9 +10,9 @@ export type DotColor =
   | "signal";
 
 /*
-  Outbound links are routed through dub.sh so clicks are tracked, while the
-  label shows the real destination — nobody should have to trust a shortener
-  to know where a link goes.
+  Every outbound link is routed through dub.sh so clicks are tracked. Labels
+  name the destination rather than repeating the URL, since a dub.sh href
+  would make a URL label misleading anyway.
 */
 export interface ProjectLink {
   label: string;
@@ -46,8 +46,8 @@ export const PROJECTS: Project[] = [
     summary:
       "Took a meal-prep app from first prototype to launch, solo. I designed the product, shipped the web app, and ran the go-to-market: positioning, Free and Pro pricing, a staged beta, a founding-member offer, and creator partnerships. No paid ads.",
     links: [
-      { label: "www.pinched.app", href: "https://dub.sh/p3OpEHk" },
-      { label: "pinched.app", href: "https://dub.sh/l0iC907" },
+      { label: "View marketing site", href: "https://dub.sh/p3OpEHk" },
+      { label: "View PWA", href: "https://dub.sh/l0iC907" },
     ],
   },
   {
