@@ -47,7 +47,7 @@ export const PROJECTS: Project[] = [
       "Took a meal-prep app from first prototype to launch, solo. I designed the product, shipped the web app, and ran the go-to-market: positioning, Free and Pro pricing, a staged beta, a founding-member offer, and creator partnerships. No paid ads.",
     links: [
       { label: "View marketing site", href: "https://dub.sh/p3OpEHk" },
-      { label: "View PWA", href: "https://dub.sh/l0iC907" },
+      { label: "Launch app", href: "https://dub.sh/l0iC907" },
     ],
   },
   {
