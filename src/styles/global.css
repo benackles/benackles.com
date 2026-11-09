@@ -92,6 +92,13 @@
   --c-dot-enumerate: #152650;
   /* Signal green — Ben's own work, and the site accent. */
   --c-dot-signal: #2e6e5b;
+  /*
+    Pinched Terracotta, Pinched's primary brand colour. It clears 3:1
+    against both grounds (3.45:1 light, 4.75:1 dark), so unlike the navies
+    below it carries through to dark mode unchanged — a brand colour that
+    shifts per theme stops being the brand colour.
+  */
+  --c-dot-pinched: #e8542a;
 
   color-scheme: light;
 }
@@ -130,6 +137,7 @@
     --c-dot-storyblok: #708fd9;
     --c-dot-enumerate: #95ace3;
     --c-dot-signal: #3c9077;
+    /* --c-dot-pinched is deliberately absent — see the note on it above. */
 
     color-scheme: dark;
   }
@@ -162,6 +170,7 @@
   --color-dot-storyblok: var(--c-dot-storyblok);
   --color-dot-enumerate: var(--c-dot-enumerate);
   --color-dot-signal: var(--c-dot-signal);
+  --color-dot-pinched: var(--c-dot-pinched);
 }
 
 @layer base {

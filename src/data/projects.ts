@@ -7,7 +7,8 @@ export type DotColor =
   | "bigcommerce"
   | "storyblok"
   | "enumerate"
-  | "signal";
+  | "signal"
+  | "pinched";
 
 /*
   Every outbound link is routed through dub.sh so clicks are tracked. Labels
@@ -40,7 +41,7 @@ export const PROJECTS: Project[] = [
   {
     eyebrow: "Independent · Build & GTM",
     name: "Pinched",
-    dot: "signal",
+    dot: "pinched",
     status: "BETA",
     featured: true,
     summary:
