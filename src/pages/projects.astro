@@ -69,14 +69,14 @@ const badgeClass =
     }
 
     {/*
-      Four across on desktop, two at md. Below md the single column is
-      staggered: odd cards inset on the right, even cards on the left, so the
-      stack reads as a zig-zag rather than a plain list.
+      Four across on desktop, two at md, one below that. The mobile column
+      runs full width: alternating insets left a ragged edge against the
+      full-width featured card above it.
     */}
     <ul class="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
       {
         rest.map((project) => (
-          <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)] max-md:odd:mr-6 max-md:even:ml-6 lg:p-6">
+          <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)] lg:p-6">
             <p class="eyebrow">{project.eyebrow}</p>
             <div class="flex items-center gap-3">
               <span
