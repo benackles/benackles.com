@@ -1,6 +1,7 @@
 /*
-  Dots carry the brand colour of the company the work was for; the two
-  independent projects keep their own. Values live in src/styles/global.css.
+  Dots carry the brand colour of the company the work was for; the one
+  independent project (Pinched) keeps its own. Values live in
+  src/styles/global.css.
 */
 export type DotColor =
   | "bigcommerce"
@@ -12,7 +13,10 @@ export interface Project {
   eyebrow: string;
   name: string;
   dot: DotColor;
-  wip?: boolean;
+  /** Short status tag shown beside the title. */
+  status?: "WIP" | "BETA";
+  /** Set on the one project shown full width above the grid. */
+  featured?: boolean;
   summary: string;
   linkLabel: string;
   href: string;
@@ -20,24 +24,15 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    eyebrow: "Independent · Developer Experience",
-    name: "Deck Design System",
+    eyebrow: "Independent · Build & GTM",
+    name: "Pinched",
     dot: "signal",
-    wip: true,
+    status: "BETA",
+    featured: true,
     summary:
-      "Built the design system behind MeetCard with Figma, React, and Storybook, connecting design decisions to reusable components, documented states, testing, and implementation.",
-    linkLabel: "Explore Deck",
-    href: "https://dub.sh/IMBS33e",
-  },
-  {
-    eyebrow: "Independent · Zero-to-One GTM",
-    name: "MeetCard",
-    dot: "signal",
-    wip: true,
-    summary:
-      "Building MeetCard from concept to working product, connecting product strategy, UX, design systems, development, positioning, pricing, and go-to-market into one end-to-end product experience.",
-    linkLabel: "Preview MeetCard.io",
-    href: "https://dub.sh/UTaYGJJ",
+      "Took a meal-prep app from first prototype to launch, solo. I designed the product, shipped the web app, and ran the go-to-market: positioning, Free and Pro pricing, a staged beta, a founding-member offer, and creator partnerships. No paid ads.",
+    linkLabel: "Visit Pinched.app",
+    href: "https://pinched.app",
   },
   {
     eyebrow: "Enumerate · AI Product Launch",
