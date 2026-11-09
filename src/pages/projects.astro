@@ -11,6 +11,12 @@ const dotClass: Record<DotColor, string> = {
   enumerate: "bg-dot-enumerate",
   signal: "bg-dot-signal",
 };
+
+const featured = PROJECTS.find((project) => project.featured);
+const rest = PROJECTS.filter((project) => !project.featured);
+
+const badgeClass =
+  "ml-2 inline-block translate-y-[-1px] rounded bg-badge px-2 py-[3px] align-middle text-[10px] font-medium tracking-[0.8px] whitespace-nowrap text-eyebrow";
 ---
 
 <BaseLayout
@@ -24,10 +30,53 @@ const dotClass: Record<DotColor, string> = {
       lede="Selected work across developer platforms, AI, headless CMS, and zero-to-one products. Positioning, messaging, go-to-market strategy, developer education, and launch execution."
     />
 
-    <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="flex flex-col gap-6">
+    {
+      featured && (
+        <article class="flex flex-col gap-4 rounded-2xl border border-accent bg-card p-6 drop-shadow-[0_2px_6px_var(--c-card-shadow)] md:p-8">
+          <p class="eyebrow">{featured.eyebrow}</p>
+          <div class="flex items-center gap-3">
+            <span
+              class:list={["size-8 shrink-0 rounded-full", dotClass[featured.dot]]}
+              aria-hidden="true"
+            />
+            <h2 class="text-[22px] leading-[1.2] font-bold tracking-[-0.5px] text-balance text-ink md:text-[28px]">
+              {featured.name}
+              {featured.status && (
+                <span class={badgeClass}>{featured.status}</span>
+              )}
+            </h2>
+          </div>
+          <p class="max-w-[720px] text-[15px] leading-[1.6] text-muted md:text-base md:leading-[1.75]">
+            {featured.summary}
+          </p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+            {featured.links.map((link) => (
+              <a
+                href={link.href}
+                class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
+              >
+                {link.label} ↗
+                <Icon
+                  name="chevron-right"
+                  class="transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            ))}
+          </div>
+        </article>
+      )
+    }
+
+    {/*
+      Four across on desktop, two at md, one below that. The mobile column
+      runs full width: alternating insets left a ragged edge against the
+      full-width featured card above it.
+    */}
+    <ul class="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
       {
-        PROJECTS.map((project) => (
-          <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)]">
+        rest.map((project) => (
+          <li class="flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)] lg:p-6">
             <p class="eyebrow">{project.eyebrow}</p>
             <div class="flex items-center gap-3">
               <span
@@ -44,10 +93,8 @@ const dotClass: Record<DotColor, string> = {
               */}
               <h2 class="text-lg font-bold text-balance text-ink">
                 {project.name}
-                {project.wip && (
-                  <span class="ml-2 inline-block translate-y-[-1px] rounded bg-badge px-2 py-[3px] align-middle text-[10px] font-medium tracking-[0.8px] whitespace-nowrap text-eyebrow">
-                    WIP
-                  </span>
+                {project.status && (
+                  <span class={badgeClass}>{project.status}</span>
                 )}
               </h2>
             </div>
@@ -55,10 +102,10 @@ const dotClass: Record<DotColor, string> = {
               {project.summary}
             </p>
             <a
-              href={project.href}
+              href={project.links[0].href}
               class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
             >
-              {project.linkLabel} ↗
+              {project.links[0].label} ↗
               <Icon
                 name="chevron-right"
                 class="transition-transform group-hover:translate-x-0.5"
@@ -68,5 +115,6 @@ const dotClass: Record<DotColor, string> = {
         ))
       }
     </ul>
+    </div>
   </Container>
 </BaseLayout>

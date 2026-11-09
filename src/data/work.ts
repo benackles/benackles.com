@@ -31,4 +31,4 @@ export const WORK: Job[] = [
 ];
 
 export const CURRENTLY_BUILDING =
-  "Exploring product marketing from both sides: building a zero-to-one product with MeetCard and a working Storybook design system with Deck.";
+  "Building Pinched in public: a meal-prep app I designed, shipped, and took to market myself.";
