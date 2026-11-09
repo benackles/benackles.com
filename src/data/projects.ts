@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     links: [{ label: "Visit Catalyst", href: "https://dub.sh/LGdyGTp" }],
   },
   {
-    eyebrow: "BigCommerce · Developer Education",
+    eyebrow: "BigCommerce · Dev Rel",
     name: "GraphQL Storefront API",
     dot: "bigcommerce",
     summary:
