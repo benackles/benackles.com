@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     name: "Numa AI",
     dot: "enumerate",
     summary:
-      "Helped reposition five separate AI capabilities into one clearer product story around agentic work, giving customers a simpler way to understand how AI could move from assistance to completed work.",
+      "Repositioned five separate AI capabilities into one product story around agentic work: AI that finishes the task, not just assists.",
     links: [{ label: "View Numa AI", href: "https://dub.sh/LcRtkwY" }],
   },
   {
@@ -63,7 +63,7 @@ export const PROJECTS: Project[] = [
     name: "Storyblok",
     dot: "storyblok",
     summary:
-      "Led a company-wide repositioning to break Storyblok out of a crowded headless CMS market, sharpening the category story, differentiation, and messaging across developers, marketers, and enterprise buyers.",
+      "Led the company-wide repositioning that broke Storyblok out of a crowded headless CMS market, across developer and enterprise audiences.",
     links: [{ label: "View storyblok.com", href: "https://dub.sh/Te5acgB" }],
   },
   {
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
     name: "Catalyst",
     dot: "bigcommerce",
     summary:
-      "Led GTM for a developer initiative that reduced the complexity of headless storefront builds, shaping the positioning, launch strategy, partner adoption, and developer story around a composable reference storefront.",
+      "Led GTM for a composable reference storefront that cut the complexity of headless builds: positioning, launch, and partner adoption.",
     links: [{ label: "Visit Catalyst", href: "https://dub.sh/LGdyGTp" }],
   },
   {
@@ -79,7 +79,7 @@ export const PROJECTS: Project[] = [
     name: "GraphQL Storefront API",
     dot: "bigcommerce",
     summary:
-      "Completed a stalled GraphQL Storefront API release with Cart & Checkout, then helped evolve the story from standalone API capability toward a clearer path to building headless storefronts with Catalyst.",
+      "Shipped a stalled GraphQL Storefront API release with Cart & Checkout, then reframed it as the on-ramp to headless storefronts.",
     links: [{ label: "Watch the series", href: "https://dub.sh/DBIoDaX" }],
   },
 ];
