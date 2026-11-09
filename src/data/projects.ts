@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     links: [{ label: "View Numa AI", href: "https://dub.sh/LcRtkwY" }],
   },
   {
-    eyebrow: "Storyblok · Company-level Positioning",
+    eyebrow: "Storyblok · Positioning",
     name: "Storyblok",
     dot: "storyblok",
     summary:
