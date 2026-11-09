@@ -50,16 +50,20 @@ const badgeClass =
           <p class="max-w-[720px] text-[15px] leading-[1.6] text-muted md:text-base md:leading-[1.75]">
             {featured.summary}
           </p>
-          <a
-            href={featured.href}
-            class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
-          >
-            {featured.linkLabel} ↗
-            <Icon
-              name="chevron-right"
-              class="transition-transform group-hover:translate-x-0.5"
-            />
-          </a>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+            {featured.links.map((link) => (
+              <a
+                href={link.href}
+                class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
+              >
+                {link.label} ↗
+                <Icon
+                  name="chevron-right"
+                  class="transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            ))}
+          </div>
         </article>
       )
     }
@@ -98,10 +102,10 @@ const badgeClass =
               {project.summary}
             </p>
             <a
-              href={project.href}
+              href={project.links[0].href}
               class="group inline-flex items-center gap-1 text-[13px] font-semibold text-accent"
             >
-              {project.linkLabel} ↗
+              {project.links[0].label} ↗
               <Icon
                 name="chevron-right"
                 class="transition-transform group-hover:translate-x-0.5"
