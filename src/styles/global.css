@@ -215,68 +215,23 @@
 /*
   Motion.
 
-  Three rules the whole site keeps to:
+  Nothing on this site animates on load. Entrances that fade or slide
+  content into place were tried and removed: at any real connection speed
+  they read as the page settling rather than as polish, and the layout
+  appearing to jump is worse than no motion at all.
 
-  1. Nothing loops. Every animation here is either a one-shot entrance or a
-     response to the pointer, so nothing is moving while the page is being
-     read.
-  2. Nothing moves far. Entrances travel 8px and hover states 2-3px — enough
-     to read as motion, not enough to make the layout feel unsettled.
-  3. Everything is gated on prefers-reduced-motion: no-preference. The
-     declarations live inside that query rather than being overridden by a
-     later one, so a reduced-motion visitor gets the final state with no
-     animation property at all — not a faster version of the same movement.
-     That matters for the entrances in particular: they begin at opacity 0,
-     and a visitor who never runs the animation must never inherit that.
+  What is left is hover only — motion the visitor asks for by pointing at
+  something, on elements that are already in place. Two rules it keeps to:
 
-  The easing is the standard "ease-out quint" curve: it leaves fast and
-  settles slowly, which reads as something arriving rather than being
-  pushed.
+  1. Nothing moves far. 2-3px, enough to confirm the pointer landed and
+     not enough to shift anything around it.
+  2. Every declaration lives inside prefers-reduced-motion: no-preference
+     rather than being overridden by a later query, so a reduced-motion
+     visitor gets no transition property at all — the hover state applies
+     instantly instead of smoothly.
+
+  The easing is "ease-out quint": it leaves fast and settles slowly.
 */
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes drop-in {
-  from {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/*
-  Fade up into place. Stagger a group by pairing it with Tailwind's
-  arbitrary delay, e.g. class="animate-rise-in [animation-delay:80ms]" —
-  the delay is inert when the animation never runs.
-*/
-@utility animate-rise-in {
-  @media (prefers-reduced-motion: no-preference) {
-    animation: rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-}
-
-/*
-  For the announcement bar. It slides out of the viewport's top edge into
-  its own layout slot, so nothing below it shifts — only the bar's paint
-  moves. Faster than rise-in because it is the first thing on the page and
-  should be settled before the eye reaches the header.
-*/
-@utility animate-drop-in {
-  @media (prefers-reduced-motion: no-preference) {
-    animation: drop-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-}
 
 /*
   Pairs with a group-hover:translate-x-* on the same element. Kept separate

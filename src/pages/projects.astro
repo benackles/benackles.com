@@ -33,7 +33,7 @@ const badgeClass =
     <div class="flex flex-col gap-6">
     {
       featured && (
-        <article class="animate-rise-in hover-lift flex flex-col gap-4 rounded-2xl border border-accent bg-card p-6 drop-shadow-[0_2px_6px_var(--c-card-shadow)] [animation-delay:160ms] hover:drop-shadow-[0_6px_14px_var(--c-pill-shadow)] md:p-8">
+        <article class="hover-lift flex flex-col gap-4 rounded-2xl border border-accent bg-card p-6 drop-shadow-[0_2px_6px_var(--c-card-shadow)] hover:drop-shadow-[0_6px_14px_var(--c-pill-shadow)] md:p-8">
           <p class="eyebrow">{featured.eyebrow}</p>
           <div class="flex items-center gap-3">
             <span
@@ -72,21 +72,11 @@ const badgeClass =
       Four across on desktop, two at md, one below that. The mobile column
       runs full width: alternating insets left a ragged edge against the
       full-width featured card above it.
-
-      The cards fade up in sequence, picking up where the featured card's
-      160ms delay leaves off: 220ms, then 70ms apart. 70ms is close enough
-      to read as one gesture rather than four separate ones, and the last
-      card has settled by 430ms. The delay is an inline style because it
-      varies per card — Tailwind cannot generate a class per index — and it
-      is inert under reduced motion, where there is no animation to delay.
     */}
     <ul class="grid gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
       {
-        rest.map((project, index) => (
-          <li
-            class="animate-rise-in hover-lift flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)] hover:drop-shadow-[0_6px_14px_var(--c-pill-shadow)] lg:p-6"
-            style={`animation-delay: ${220 + index * 70}ms`}
-          >
+        rest.map((project) => (
+          <li class="hover-lift flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 drop-shadow-[0_2px_6px_var(--c-card-shadow)] hover:drop-shadow-[0_6px_14px_var(--c-pill-shadow)] lg:p-6">
             <p class="eyebrow">{project.eyebrow}</p>
             <div class="flex items-center gap-3">
               <span
