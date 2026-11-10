@@ -60,7 +60,12 @@
   --c-ink: #18181b;
   --c-muted: #52525b;
   --c-subtle: #71717a;
-  --c-accent: #2e6e5b;
+  /*
+    Pinched Herb Green. 5.80:1 on this ground and 5.00:1 on --c-badge,
+    which is the binding one — the announcement bar's link sits on the
+    badge, not the page.
+  */
+  --c-accent: #3d6b4f;
   --c-eyebrow: #565c5a;
   --c-badge: #ede7dd;
   --c-code: #18181b;
@@ -110,7 +115,18 @@
     --c-ink: #fafafa;
     --c-muted: #a1a1aa;
     --c-subtle: #71717a;
-    --c-accent: #2dd4bf;
+    /*
+      Herb green lifted for the dark ground, the same HSL move the brand
+      navies get below: hue 143 and saturation held, lightness stepped from
+      33% to 60%. The unlifted #3d6b4f manages only 2.83:1 on #1a1a1a. At
+      60% it reaches 7.38:1 here and 5.01:1 on --c-badge, and 60% is the
+      floor — one step down (55%) drops the badge to 4.44:1, under AA.
+
+      Unlike the CTA fill this is a colour text is drawn IN rather than ON,
+      so it cannot stay #3d6b4f across both themes the way --color-brand
+      does. Holding the hue is what keeps the two themes one brand.
+    */
+    --c-accent: #7db593;
     --c-eyebrow: #8a9290;
     --c-badge: #2d3a3a;
     --c-code: #121214;
@@ -159,8 +175,13 @@
   --color-code: var(--c-code);
   --color-code-ink: var(--c-code-ink);
 
-  /* Brand green stays constant across both themes — it is the CTA fill. */
-  --color-brand: #2e6e5b;
+  /*
+    Pinched Herb Green, constant across both themes — it is the CTA fill,
+    and it always carries white text (6.15:1, AA at every size). Unlike
+    --c-accent it never needs lifting, because the text sits on it rather
+    than it sitting on the page.
+  */
+  --color-brand: #3d6b4f;
 
   /* Project accent dots — see the --c-dot-* values above. */
   --color-dot-bigcommerce: var(--c-dot-bigcommerce);
