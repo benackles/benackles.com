@@ -14,6 +14,11 @@ export const SHOW_BOOKING_CTA = false;
   Set show to false to hide it site-wide. Copy follows the Pinched tone of
   voice: one small smile at most, every beat ends in a full stop, the
   button is a sentence-case verb, no emoji.
+
+  href goes through dub.sh so the click is tracked, like every other
+  outbound link on the site. This is the same short link the Pinched card
+  on /projects uses for "View marketing site", so the two placements share
+  a click count — split them if the bar ever needs its own attribution.
 */
 export const ANNOUNCEMENT = {
   show: true,
@@ -21,7 +26,7 @@ export const ANNOUNCEMENT = {
   headline: "I cooked up Pinched.",
   tagline: "Plan the week. Prep once. Cook faster.",
   cta: "Try it free",
-  href: "https://pinched.app",
+  href: "https://dub.sh/p3OpEHk",
 } as const;
 
 export const SITE = {
