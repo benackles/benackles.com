@@ -3,12 +3,7 @@
   independent project (Pinched) keeps its own. Values live in
   src/styles/global.css.
 */
-export type DotColor =
-  | "bigcommerce"
-  | "storyblok"
-  | "enumerate"
-  | "signal"
-  | "pinched";
+export type DotColor = "bigcommerce" | "storyblok" | "enumerate" | "pinched";
 
 /*
   Every outbound link is routed through dub.sh so clicks are tracked. Labels
