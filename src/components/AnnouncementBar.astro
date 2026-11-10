@@ -1,0 +1,52 @@
+---
+import { ANNOUNCEMENT } from "../consts";
+
+/*
+  Slim announcement bar above the header, for launches and other news.
+  Toggle and copy live in ANNOUNCEMENT in src/consts.ts.
+
+  Desktop: one centred row. Mobile: two fixed lines (tag + headline, then
+  tagline + link), each kept on one line with whitespace-nowrap so the copy
+  never wraps mid-phrase at 360-390px. The two wrappers use md:contents so
+  at md+ their children join the single row.
+*/
+const { show, tag, headline, tagline, cta, href } = ANNOUNCEMENT;
+---
+
+{
+  show && (
+    <aside
+      aria-label="Announcement"
+      class="animate-drop-in border-b border-border bg-badge text-[13px] leading-5 text-ink"
+    >
+      <div class="mx-auto flex min-h-11 w-full max-w-[1440px] flex-col items-center justify-center gap-1 px-5 py-2.5 text-center md:flex-row md:gap-3 md:px-24">
+        <div class="flex items-center gap-2 whitespace-nowrap md:contents">
+          <span class="rounded bg-brand px-1.5 py-0.5 text-[10px] leading-[14px] font-semibold tracking-[0.8px] text-white uppercase">
+            {tag}
+          </span>
+          <span class="font-semibold">{headline}</span>
+        </div>
+        <div class="flex items-center gap-2 whitespace-nowrap md:contents">
+          <span>{tagline}</span>
+          <a
+            href={href}
+            class="group font-semibold text-accent transition-colors hover:text-ink"
+          >
+            {cta}{" "}
+            {/*
+              The arrow is its own element so it can slide on hover without
+              dragging the label with it. aria-hidden because the link text
+              already names the destination.
+            */}
+            <span
+              aria-hidden="true"
+              class="nudge-x inline-block group-hover:translate-x-0.5"
+            >
+              &rarr;
+            </span>
+          </a>
+        </div>
+      </div>
+    </aside>
+  )
+}

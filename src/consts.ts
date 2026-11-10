@@ -9,6 +9,21 @@ import type { IconName } from "./components/Icon.astro";
 */
 export const SHOW_BOOKING_CTA = false;
 
+/*
+  Announcement bar above the header (src/components/AnnouncementBar.astro).
+  Set show to false to hide it site-wide. Copy follows the Pinched tone of
+  voice: one small smile at most, every beat ends in a full stop, the
+  button is a sentence-case verb, no emoji.
+*/
+export const ANNOUNCEMENT = {
+  show: true,
+  tag: "Built in Public",
+  headline: "I cooked up Pinched.",
+  tagline: "Plan the week. Prep once. Cook faster.",
+  cta: "Try it free",
+  href: "https://pinched.app",
+} as const;
+
 export const SITE = {
   title: "Ben Ackles",
   url: "https://benackles.com",

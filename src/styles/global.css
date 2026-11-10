@@ -14,9 +14,8 @@
   font-display: swap;
   src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2")
     format("woff2-variations");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -27,9 +26,8 @@
   font-display: swap;
   src: url("@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2")
     format("woff2-variations");
-  unicode-range:
-    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
-    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
     U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
@@ -40,9 +38,8 @@
   font-display: swap;
   src: url("@fontsource-variable/inter/files/inter-latin-wght-italic.woff2")
     format("woff2-variations");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -213,4 +210,102 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--c-eyebrow);
+}
+
+/*
+  Motion.
+
+  Three rules the whole site keeps to:
+
+  1. Nothing loops. Every animation here is either a one-shot entrance or a
+     response to the pointer, so nothing is moving while the page is being
+     read.
+  2. Nothing moves far. Entrances travel 8px and hover states 2-3px — enough
+     to read as motion, not enough to make the layout feel unsettled.
+  3. Everything is gated on prefers-reduced-motion: no-preference. The
+     declarations live inside that query rather than being overridden by a
+     later one, so a reduced-motion visitor gets the final state with no
+     animation property at all — not a faster version of the same movement.
+     That matters for the entrances in particular: they begin at opacity 0,
+     and a visitor who never runs the animation must never inherit that.
+
+  The easing is the standard "ease-out quint" curve: it leaves fast and
+  settles slowly, which reads as something arriving rather than being
+  pushed.
+*/
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+  Fade up into place. Stagger a group by pairing it with Tailwind's
+  arbitrary delay, e.g. class="animate-rise-in [animation-delay:80ms]" —
+  the delay is inert when the animation never runs.
+*/
+@utility animate-rise-in {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rise-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/*
+  For the announcement bar. It slides out of the viewport's top edge into
+  its own layout slot, so nothing below it shifts — only the bar's paint
+  moves. Faster than rise-in because it is the first thing on the page and
+  should be settled before the eye reaches the header.
+*/
+@utility animate-drop-in {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: drop-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/*
+  Pairs with a group-hover:translate-x-* on the same element. Kept separate
+  from Tailwind's transition-transform so the transition itself disappears
+  under reduced motion, leaving the hover state instant rather than smooth.
+*/
+@utility nudge-x {
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/*
+  Card hover: a 2px lift, paired at the call site with a deeper
+  hover:drop-shadow-* so the card reads as rising off the page rather than
+  just sliding up it. The shadow itself stays in Tailwind's hands — both it
+  and the resting shadow compile to `filter`, and splitting one property
+  across two systems is how you get a hover state that silently wins or
+  loses on rule order. This utility owns the transform and the timing for
+  both.
+*/
+@utility hover-lift {
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 200ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
 }
