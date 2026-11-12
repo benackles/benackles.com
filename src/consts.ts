@@ -22,7 +22,7 @@ export const SHOW_BOOKING_CTA = false;
 */
 export const ANNOUNCEMENT = {
   show: true,
-  tag: "Built in Public",
+  tag: "Building",
   headline: "I cooked up Pinched.",
   tagline: "Plan the week. Prep once. Cook faster.",
   cta: "Try it free",
