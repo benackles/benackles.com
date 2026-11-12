@@ -23,7 +23,7 @@ export const SHOW_BOOKING_CTA = false;
 export const ANNOUNCEMENT = {
   show: true,
   tag: "Building",
-  headline: "I cooked up Pinched.",
+  headline: "Cook with me at Pinched.",
   tagline: "Plan the week. Prep once. Cook faster.",
   cta: "Try it free",
   href: "https://dub.sh/p3OpEHk",
